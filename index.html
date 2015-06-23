@@ -140,6 +140,7 @@
 		sensortag
 			.statusCallback(statusHandler)
 			.errorCallback(errorHandler)
+			/*
 			.keypressCallback(keypressHandler)
 			.temperatureCallback(temperatureHandler, 1000)
 			.humidityCallback(humidityHandler, 1000)
@@ -147,6 +148,7 @@
 			.accelerometerCallback(accelerometerHandler, 1000)
 			.magnetometerCallback(magnetometerHandler, 1000)
 			.gyroscopeCallback(gyroscopeHandler, 1000)
+			*/
 			.luxometerCallback(luxometerHandler, 1000)
 	}
 
@@ -390,7 +392,7 @@
 			//'raw: <span style="font-family: monospace;">0x' +
 			//	bufferToHexStr(data, 0, 2) + '</span><br/>' +
 			'Light level: ' + value.toPrecision(5) + ' lux<br/>'
-
+		console.log('test lux ');
 		// Update the value displayed.
 		displayValue('LuxometerData', string)
 	}

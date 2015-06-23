@@ -35,7 +35,7 @@
 		 * @instance
 		 * @public
 		 */
-		instance.deviceModel = 'CC2650'
+		instance.deviceModel = 'Neo-Gait'
 
 		/**
 		 * Determine if a BLE device is a SensorTag CC2650.
@@ -48,7 +48,7 @@
 			return (device != null) &&
 				(device.advertisementData != null) &&
 				(device.advertisementData.kCBAdvDataLocalName ==
-					'CC2650 SensorTag')
+					'Neo-Gait')
 		}
 
 		/**
