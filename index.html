@@ -10,7 +10,7 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no
 		initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
 
-	<title>TI SensorTag CC2650 &amp; CC2541 Sensors</title>
+	<title>NEO CC2650 &amp; CC2541 Sensors</title>
 
 	<style>
 		@import 'ui/css/evothings-app.css';
@@ -116,12 +116,16 @@
 	function initialiseSensorTag()
 	{
 		// Create SensorTag CC2650 instance.
-		sensortag = evothings.tisensortag.createInstance(
-			evothings.tisensortag.CC2650_BLUETOOTH_SMART)
+		//sensortag = evothings.tisensortag.createInstance(
+		//	evothings.tisensortag.CC2650_BLUETOOTH_SMART)
 
 		// Uncomment to use SensorTag CC2541.
 		//sensortag = evothings.tisensortag.createInstance(
 		//	evothings.tisensortag.CC2541_BLUETOOTH_SMART)
+		
+		// Uncomment to use SensorTag neo-gait.
+		sensortag = evothings.tisensortag.createInstance(
+			evothings.tisensortag.NEO_BLUETOOTH_SMART)
 
 		//
 		// Here sensors are set up.

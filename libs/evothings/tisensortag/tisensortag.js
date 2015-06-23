@@ -19,6 +19,8 @@ evothings.tisensortag.CC2650_BLUETOOTH_SMART = 'CC2650 Bluetooth Smart'
  */
 evothings.tisensortag.CC2541_BLUETOOTH_SMART = 'CC2541 Bluetooth Smart'
 
+evothings.tisensortag.NEO_BLUETOOTH_SMART = 'Neo-Gait'
+
 /**
  * Public. Create a SensorTag instance.
  * @param {string} type String with type of tag. Use constants
@@ -40,6 +42,10 @@ evothings.tisensortag.createInstance = function(type)
 	else if (evothings.tisensortag.CC2650_BLUETOOTH_SMART == type)
 	{
 		var factory = evothings.tisensortag.ble.CC2650
+	}
+	else if (evothings.tisensortag.NEO_BLUETOOTH_SMART == type){
+	
+		var factory = evothings.tisensortag.ble.neo
 	}
 	else
 	{
@@ -531,5 +537,6 @@ evothings.loadScripts(
 	'libs/evothings/easyble/easyble.js',
 	'libs/evothings/tisensortag/tisensortag-ble.js',    // Abstract object for BLE tags
 	'libs/evothings/tisensortag/tisensortag-ble-cc2541.js', // Specific object for CC2541
-	'libs/evothings/tisensortag/tisensortag-ble-cc2650.js'  // Specific object for CC2650
+	'libs/evothings/tisensortag/tisensortag-ble-cc2650.js',  // Specific object for CC2650
+	'libs/evothings/tisensortag/tisensortag-ble-neo.js'  // Specific object for CC2650
 ])

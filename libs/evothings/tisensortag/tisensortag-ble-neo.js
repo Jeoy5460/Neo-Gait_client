@@ -1,16 +1,16 @@
 
 ;(function()
 {
-	evothings.tisensortag.ble.CC2650 = {}
+	evothings.tisensortag.ble.neo = {}
 
 	/**
 	 * @namespace
 	 * @description Internal implementation of JavaScript library for the TI SensorTag CC2650.
-	 * @alias evothings.tisensortag.ble.CC2650
+	 * @alias evothings.tisensortag.ble.neo
 	 */
 	var sensortag = {}
 
-	evothings.tisensortag.ble.CC2650 = sensortag
+	evothings.tisensortag.ble.neo = sensortag
 
 	/**
 	 * Create a SensorTag CC2650 instance.
@@ -35,7 +35,7 @@
 		 * @instance
 		 * @public
 		 */
-		instance.deviceModel = 'Neo-Gait'
+		instance.deviceModel = 'CC2650'
 
 		/**
 		 * Determine if a BLE device is a SensorTag CC2650.
