@@ -10,7 +10,7 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no
 		initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
 
-	<title>NEO CC2650 &amp; CC2541 Sensors</title>
+	<title>Neo-Gait CC2650 &amp; CC2541 </title>
 
 	<style>
 		@import 'ui/css/evothings-app.css';
@@ -36,7 +36,7 @@
 		<!--<button class="menu" onclick=""><img src="ui/images/menu.svg" /></button>-->
 	</header>
 
-	<h1>TI SensorTag CC2650 &amp; CC2541 Sensors</h1>
+	<h1>Neo-Gait CC2650 &amp; CC2541</h1>
 
 	<img src="TISensorTagCC2650.png"
 		style="float:right;width:120px;height:auto;"/>
@@ -97,9 +97,9 @@
 	</p>
 
 	<div id="Luxometer">
-		<h2>Luxometer:</h2>
+		<h2>Angle:</h2>
 		<p>
-			<span id="LuxometerData">[Waiting for value]</span>
+			<span id="Angle">[Waiting for value]</span>
 		</p>
 	</div>
 
@@ -224,7 +224,7 @@
 		displayValue('MagnetometerData', blank)
 		displayValue('BarometerData', blank)
 		displayValue('GyroscopeData', blank)
-		displayValue('LuxometerData', blank)
+		displayValue('Angle', blank)
 
 		// Reset screen color.
 		setBackgroundColor('white')
@@ -391,10 +391,10 @@
 		string =
 			//'raw: <span style="font-family: monospace;">0x' +
 			//	bufferToHexStr(data, 0, 2) + '</span><br/>' +
-			'Light level: ' + value.toPrecision(5) + ' lux<br/>'
-		console.log('test lux ');
+			'degree: ' + (value/100.0).toPrecision(5) + '<br/>'
+		//console.log('test lux ');
 		// Update the value displayed.
-		displayValue('LuxometerData', string)
+		displayValue('Angle', string)
 	}
 
 	function displayValue(elementId, value)

@@ -48,7 +48,7 @@
 			return (device != null) &&
 				(device.advertisementData != null) &&
 				(device.advertisementData.kCBAdvDataLocalName ==
-					'Neo-Gait')
+					'Neo-Gai')
 		}
 
 		/**
@@ -413,6 +413,7 @@
 			// from BLEUtility.m in Texas Instruments TI BLE SensorTag
 			// iOS app source code.
 			// TODO: move to util.js
+			/*
 			var mantissa = value & 0x0FFF
 			var exponent = value >> 12
 
@@ -423,6 +424,8 @@
 
 			// Return result.
 			return lux
+			*/
+			return value
 		}
 
 		/**
