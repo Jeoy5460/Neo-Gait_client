@@ -48,7 +48,7 @@
 			return (device != null) &&
 				(device.advertisementData != null) &&
 				(device.advertisementData.kCBAdvDataLocalName ==
-					'Neo-Gai')
+					'Neo-Gait-vmamst')
 		}
 
 		/**

@@ -1,0 +1,56 @@
+<NotepadPlus>
+    <Project name="neo_client">
+        <Folder name="libs">
+            <Folder name="evothings">
+                <Folder name="easyble">
+                    <File name="libs\evothings\easyble\easyble.js" />
+                </Folder>
+                <Folder name="tisensortag">
+                    <File name="libs\evothings\tisensortag\tisensortag-ble-cc2541.js" />
+                    <File name="libs\evothings\tisensortag\tisensortag-ble-cc2650.js" />
+                    <File name="libs\evothings\tisensortag\tisensortag-ble-neo.js" />
+                    <File name="libs\evothings\tisensortag\tisensortag-ble.js" />
+                    <File name="libs\evothings\tisensortag\tisensortag.js" />
+                </Folder>
+                <Folder name="ui">
+                    <File name="libs\evothings\ui\fastclick.js" />
+                    <File name="libs\evothings\ui\ui.js" />
+                </Folder>
+                <Folder name="util">
+                    <File name="libs\evothings\util\util.js" />
+                </Folder>
+                <File name="libs\evothings\evothings.js" />
+                <File name="libs\evothings\version-1.2.0" />
+            </Folder>
+        </Folder>
+        <Folder name="ui">
+            <Folder name="css">
+                <File name="ui\css\evothings-app.css" />
+            </Folder>
+            <Folder name="fonts">
+                <File name="ui\fonts\ProximaNova-Black-webfont.eot" />
+                <File name="ui\fonts\ProximaNova-Black-webfont.svg" />
+                <File name="ui\fonts\ProximaNova-Black-webfont.ttf" />
+                <File name="ui\fonts\ProximaNova-Black-webfont.woff" />
+                <File name="ui\fonts\ProximaNova-Bold-webfont.eot" />
+                <File name="ui\fonts\ProximaNova-Bold-webfont.svg" />
+                <File name="ui\fonts\ProximaNova-Bold-webfont.ttf" />
+                <File name="ui\fonts\ProximaNova-Bold-webfont.woff" />
+                <File name="ui\fonts\ProximaNova-Reg-webfont.eot" />
+                <File name="ui\fonts\ProximaNova-Reg-webfont.svg" />
+                <File name="ui\fonts\ProximaNova-Reg-webfont.ttf" />
+                <File name="ui\fonts\ProximaNova-Reg-webfont.woff" />
+                <File name="ui\fonts\ProximaNova.css" />
+            </Folder>
+            <Folder name="images">
+                <File name="ui\images\arrow-left.svg" />
+                <File name="ui\images\arrow-right.svg" />
+                <File name="ui\images\logo.svg" />
+                <File name="ui\images\menu.svg" />
+            </Folder>
+        </Folder>
+        <File name="index.html" />
+        <File name="sind.js" />
+        <File name="TISensorTagCC2650.png" />
+    </Project>
+</NotepadPlus>
