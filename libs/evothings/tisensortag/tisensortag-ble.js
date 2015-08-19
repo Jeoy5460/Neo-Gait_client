@@ -173,10 +173,9 @@
 		instance.LUXOMETER_PERIOD = 'f000aa73-0451-4000-b000-000000000000'
 		instance.LUXOMETER_NOTIFICATION = '00002902-0000-1000-8000-00805f9b34fb'
 		*/
-		instance.LUXOMETER_SERVICE = '0000FA00-0000-1000-8000-00805f9b34fb'
-		instance.LUXOMETER_DATA = '0000FA01-0000-1000-8000-00805f9b34fb'
-		//instance.LUXOMETER_CONFIG = '0000FA02-0000-1000-8000-00805f9b34fb'
-		instance.LUXOMETER_PERIOD = '0000FA03-0000-1000-8000-00805f9b34fb'
+		instance.LUXOMETER_SERVICE = '0000FA40-0000-1000-8000-00805f9b34fb'
+		instance.LUXOMETER_DATA = '0000FA45-0000-1000-8000-00805f9b34fb'
+		instance.LUXOMETER_PERIOD = '0000FA43-0000-1000-8000-00805f9b34fb'
 		instance.LUXOMETER_NOTIFICATION = '00002902-0000-1000-8000-00805f9b34fb'
 
 		// Only in SensorTag CC2650.
@@ -570,7 +569,7 @@
 			{
 				// Set firmware string.
 				var fw = evothings.ble.fromUtf8(data)
-				instance.firmwareString = fw.match(/\d+\.\d+\S?\b/g)[0] || ''
+				instance.firmwareString = fw.match(/\d+\.\d+\.\d+\S?\b/g)[0] || ''
 
 				// Notify that device info is available.
 				instance.callStatusCallback(sensortag.status.DEVICE_INFO_AVAILABLE)
