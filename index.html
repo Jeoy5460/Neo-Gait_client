@@ -97,10 +97,11 @@
 	</p>
 
 	<div id="Luxometer">
-		<h2>Angle:</h2>
+		<h2>Flash Test:</h2>
 		<p>
 			<span id="Angle">[Waiting for value]</span>
 		</p>
+        <div id="flash_test" style="background:white;height:20px;width:50%;"></div>
 	</div>
 
 	<h2>Device info:</h2>
@@ -395,12 +396,23 @@
 		//console.log('test lux ');
 		// Update the value displayed.
 		displayValue('Angle', string)
+        disp_test_result("flash_test",1)
+        
 	}
 
 	function displayValue(elementId, value)
 	{
 		document.getElementById(elementId).innerHTML = value
 	}
+
+    function disp_test_result(elem_id, value)
+    {
+        if (1 == value){
+            document.getElementById(elem_id).style.backgroundColor ='green' 
+        } else {
+            document.getElementById(elem_id).style.backgroundColor ='red' 
+        }
+    }
 
 	function setBackgroundColor(color)
 	{
