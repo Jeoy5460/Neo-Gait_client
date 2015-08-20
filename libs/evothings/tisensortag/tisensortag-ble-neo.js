@@ -35,7 +35,7 @@
 		 * @instance
 		 * @public
 		 */
-		instance.deviceModel = 'Neo-Gait'
+		instance.deviceModel = 'Neo-Gait-fkxjsx'
 
 		/**
 		 * Determine if a BLE device is a SensorTag CC2650.
@@ -48,7 +48,7 @@
 			return (device != null) &&
 				(device.advertisementData != null) &&
 				(device.advertisementData.kCBAdvDataLocalName ==
-					'Neo-Gait-vmamst')
+					'Neo-Gait-fkxjsx')
 		}
 
 		/**
@@ -268,8 +268,8 @@
 			instance.sensorOn(
 				instance.LUXOMETER_CONFIG,
 				instance.luxometerConfig,
-				instance.LUXOMETER_PERIOD,
-				instance.luxometerInterval,
+				null,//instance.LUXOMETER_PERIOD,
+				null,//instance.luxometerInterval,
 				instance.LUXOMETER_DATA,
 				instance.LUXOMETER_NOTIFICATION,
 				instance.luxometerFun
@@ -290,6 +290,11 @@
 
 			return instance
 		}
+
+        instance.test_on = function()
+        {
+            instance.set_test_value (instance.LUXOMETER_PERIOD, 0x01)
+        }
 
 		/**
 		 * SensorTag CC2650.
@@ -427,6 +432,14 @@
 			*/
 			return value
 		}
+
+        instance.get_test_result = function(data) 
+        {
+			var i = evothings.util.littleEndianToUint8(data, 0)
+			var r = evothings.util.littleEndianToUint8(data, 1)
+			return { item:i , res: r }
+        
+        }
 
 		/**
 		 * Public. Checks if the Temperature sensor is available.

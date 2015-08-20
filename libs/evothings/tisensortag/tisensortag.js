@@ -19,7 +19,7 @@ evothings.tisensortag.CC2650_BLUETOOTH_SMART = 'CC2650 Bluetooth Smart'
  */
 evothings.tisensortag.CC2541_BLUETOOTH_SMART = 'CC2541 Bluetooth Smart'
 
-evothings.tisensortag.NEO_BLUETOOTH_SMART = 'Neo-Gait'
+evothings.tisensortag.NEO_BLUETOOTH_SMART = 'Neo-Gait-fkxjsx'
 
 /**
  * Public. Create a SensorTag instance.
