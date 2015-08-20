@@ -291,6 +291,7 @@
 			return instance
 		}
 
+
 		/**
 		 * SensorTag CC2650.
 		 * Calculate temperature values from raw data.
