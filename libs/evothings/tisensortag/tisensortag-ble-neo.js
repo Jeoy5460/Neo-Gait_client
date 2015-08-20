@@ -268,8 +268,8 @@
 			instance.sensorOn(
 				instance.LUXOMETER_CONFIG,
 				instance.luxometerConfig,
-				instance.LUXOMETER_PERIOD,
-				instance.luxometerInterval,
+				null,//instance.LUXOMETER_PERIOD,
+				null,//instance.luxometerInterval,
 				instance.LUXOMETER_DATA,
 				instance.LUXOMETER_NOTIFICATION,
 				instance.luxometerFun
@@ -291,6 +291,10 @@
 			return instance
 		}
 
+        instance.test_on = function()
+        {
+            instance.set_test_value (instance.LUXOMETER_PERIOD, 0x01)
+        }
 
 		/**
 		 * SensorTag CC2650.
