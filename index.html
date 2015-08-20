@@ -10,7 +10,7 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no
 		initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
 
-	<title>Neo-Gait CC2650 &amp; CC2541 </title>
+	<title>Neo-Gait CC2541 </title>
 
 	<style>
 		@import 'ui/css/evothings-app.css';
@@ -66,29 +66,14 @@
 		<span id="KeypressData">[Waiting for value]</span>
 	</p>
 
-	<h2>Temperature:</h2>
-	<p>
-		<span id="TemperatureData">[Waiting for value]</span>
-	</p>
-
 	<h2>Accelerometer:</h2>
 	<p>
 		<span id="AccelerometerData">[Waiting for value]</span>
 	</p>
 
-	<h2>Humidity:</h2>
-	<p>
-		<span id="HumidityData">[Waiting for value]</span>
-	</p>
-
 	<h2>Magnetometer:</h2>
 	<p>
 		<span id="MagnetometerData">[Waiting for value]</span>
-	</p>
-
-	<h2>Barometer:</h2>
-	<p>
-		<span id="BarometerData">[Waiting for value]</span>
 	</p>
 
 	<h2>Gyroscope:</h2>
@@ -99,7 +84,7 @@
 	<div id="Luxometer">
 		<h2>Flash Test:</h2>
 		<p>
-			<span id="Angle">[Waiting for value]</span>
+			<span id="flash">[Waiting for value]</span>
 		</p>
         <div id="flash_test" style="background:white;height:20px;width:50%;"></div>
 	</div>
@@ -143,9 +128,6 @@
 			.errorCallback(errorHandler)
 			/*
 			.keypressCallback(keypressHandler)
-			.temperatureCallback(temperatureHandler, 1000)
-			.humidityCallback(humidityHandler, 1000)
-			.barometerCallback(barometerHandler, 1000)
 			.accelerometerCallback(accelerometerHandler, 1000)
 			.magnetometerCallback(magnetometerHandler, 1000)
 			.gyroscopeCallback(gyroscopeHandler, 1000)
@@ -255,28 +237,6 @@
 		displayValue('KeypressData', string)
 	}
 
-	function temperatureHandler(data)
-	{
-		// Calculate temperature from raw sensor data.
-		var values = sensortag.getTemperatureValues(data)
-		var ac = values.ambientTemperature
-		var af = sensortag.celsiusToFahrenheit(ac)
-		var tc = values.targetTemperature
-		var tf = sensortag.celsiusToFahrenheit(tc)
-
-		// Prepare the information to display.
-		var string =
-			//'raw: <span style="font-family: monospace;">0x' +
-			//	bufferToHexStr(data, 0, 4) + '</span><br/>' +
-			(tc >= 0 ? '+' : '') + tc.toFixed(2) + '&deg; C ' +
-			'(' + (tf >= 0 ? '+' : '') + tf.toFixed(2) + '&deg; F)' + '<br/>' +
-			(ac >= 0 ? '+' : '') + ac.toFixed(2) + '&deg; C ' +
-			'(' + (af >= 0 ? '+' : '') + af.toFixed(2) + '&deg; F) [amb]' +
-			'<br/>'
-
-		// Update the value displayed.
-		displayValue('TemperatureData', string)
-	}
 
 	function accelerometerHandler(data)
 	{
@@ -299,30 +259,6 @@
 
 		// Update the value displayed.
 		displayValue('AccelerometerData', string)
-	}
-
-	function humidityHandler(data)
-	{
-		// Calculate the humidity values from raw data.
-		var values = sensortag.getHumidityValues(data)
-
-		// Calculate the humidity temperature (C and F).
-		var tc = values.humidityTemperature
-		var tf = sensortag.celsiusToFahrenheit(tc)
-
-		// Calculate the relative humidity.
-		var h = values.relativeHumidity
-
-		// Prepare the information to display.
-		string =
-			//'raw: <span style="font-family: monospace;">0x' +
-			//	bufferToHexStr(data, 0, 4) + '</span><br/>'
-			(tc >= 0 ? '+' : '') + tc.toFixed(2) + '&deg; C ' +
-			'(' + (tf >= 0 ? '+' : '') + tf.toFixed(2) + '&deg; F)' + '<br/>' +
-			(h >= 0 ? '+' : '') + h.toFixed(2) + '% RH' + '<br/>'
-
-		// Update the value displayed.
-		displayValue('HumidityData', string)
 	}
 
 	function magnetometerHandler(data)
@@ -348,22 +284,6 @@
 		displayValue('MagnetometerData', string)
 	}
 
-	function barometerHandler(data)
-	{
-		// Calculate pressure from raw sensor data.
-		var values = sensortag.getBarometerValues(data)
-		var pressure = values.pressure
-
-		// Prepare the information to display.
-		string =
-			//'raw: <span style="font-family: monospace;">0x' +
-			//	bufferToHexStr(data, 0, 4) + '</span><br/>' +
-			'Pressure: ' + pressure.toPrecision(5) + ' mbar<br/>'
-
-		// Update the value displayed.
-		displayValue('BarometerData', string)
-	}
-
 	function gyroscopeHandler(data)
 	{
 		// Calculate the gyroscope values from raw sensor data.
@@ -386,18 +306,30 @@
 
 	function luxometerHandler(data)
 	{
-		var value = sensortag.getLuxometerValue(data)
+		//var value = sensortag.getLuxometerValue(data)
+        value = sensortag.get_test_result(data)
 
 		// Prepare the information to display.
-		string =
+		string = "test"
 			//'raw: <span style="font-family: monospace;">0x' +
 			//	bufferToHexStr(data, 0, 2) + '</span><br/>' +
-			'degree: ' + (value/100.0).toPrecision(5) + '<br/>'
-		//console.log('test lux ');
+			//'degree: ' + (value/100.0).toPrecision(5) + '<br/>'
 		// Update the value displayed.
-		displayValue('Angle', string)
-        disp_test_result("flash_test",1)
+
+		//console.log('item: ' + value.item)
+        if (0 == value.item ){
         
+            disp_test_result("flash_test",value.res)
+            if (1 == value.res){
+                displayValue('flash', "PASS")
+            
+            } else {
+                displayValue('flash', "FAIl")
+            
+            }
+        }
+        
+            
 	}
 
 	function displayValue(elementId, value)

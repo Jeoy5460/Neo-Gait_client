@@ -428,6 +428,14 @@
 			return value
 		}
 
+        instance.get_test_result = function(data) 
+        {
+			var i = evothings.util.littleEndianToUint8(data, 0)
+			var r = evothings.util.littleEndianToUint8(data, 1)
+			return { item:i , res: r }
+        
+        }
+
 		/**
 		 * Public. Checks if the Temperature sensor is available.
 		 * @preturn true if available, false if not.
