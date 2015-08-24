@@ -355,10 +355,14 @@
 		instance.getGyroscopeValues = function(data)
 		{
 			// Calculate gyroscope values.
+            /*
 			var gx = evothings.util.littleEndianToInt16(data, 0) * 255.0 / 32768.0
 			var gy = evothings.util.littleEndianToInt16(data, 2) * 255.0 / 32768.0
 			var gz =  evothings.util.littleEndianToInt16(data, 4) * 255.0 / 32768.0
-
+            */
+			var gx = evothings.util.littleEndianToInt16(data, 6)/1000 
+			var gy = evothings.util.littleEndianToInt16(data, 8) /1000
+			var gz =  evothings.util.littleEndianToInt16(data, 10) /1000
 			// Return result.
 			return { x: gx, y: gy, z: gz }
 		}

@@ -35,6 +35,7 @@
 			.magnetometerCallback(magnetometerHandler, 1000)
 			.gyroscopeCallback(gyroscopeHandler, 1000)
 			*/
+			.gyroscopeCallback(gyroscopeHandler, 1000)
 			.accelerometerCallback(accelerometerHandler, 1000)
 			.luxometerCallback(luxometerHandler, 1000)
 	}
@@ -161,6 +162,7 @@
 			'y: ' + (y >= 0 ? '+' : '') + y.toFixed(5) + 'G<br/>' +
 			'z: ' + (z >= 0 ? '+' : '') + z.toFixed(5) + 'G<br/>'
 
+        document.getElementById("acc_z").style.width = Math.abs(z.toFixed(2)*100)+"%" 
 		// Update the value displayed.
 		displayValue('AccelerometerData', string)
 	}
@@ -203,6 +205,8 @@
 			'x: ' + (x >= 0 ? '+' : '') + x.toFixed(5) + '<br/>' +
 			'y: ' + (y >= 0 ? '+' : '') + y.toFixed(5) + '<br/>' +
 			'z: ' + (z >= 0 ? '+' : '') + z.toFixed(5) + '<br/>'
+        var gyro_w = y/2000.0 
+        document.getElementById("gyro_y").style.width = Math.abs((gyro_w).toFixed(2)*100)+"%" 
 
 		// Update the value displayed.
 		displayValue('GyroscopeData', string)
