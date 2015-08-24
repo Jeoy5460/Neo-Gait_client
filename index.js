@@ -35,6 +35,7 @@
 			.magnetometerCallback(magnetometerHandler, 1000)
 			.gyroscopeCallback(gyroscopeHandler, 1000)
 			*/
+			.accelerometerCallback(accelerometerHandler, 1000)
 			.luxometerCallback(luxometerHandler, 1000)
 	}
 

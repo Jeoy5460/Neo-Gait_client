@@ -326,14 +326,20 @@
 		 * @public
 		 */
 		instance.getAccelerometerValues = function(data)
-		{
+		{/*
 			var divisors = {x: -16384.0, y: 16384.0, z: -16384.0}
 
 			// Calculate accelerometer values.
 			var ax = evothings.util.littleEndianToInt16(data, 6) / divisors.x
 			var ay = evothings.util.littleEndianToInt16(data, 8) / divisors.y
 			var az = evothings.util.littleEndianToInt16(data, 10) / divisors.z
+        */
+			var divisors = {x: 2000, y: 2000, z: 2000}
 
+			// Calculate accelerometer values.
+			var ax = evothings.util.littleEndianToInt16(data, 0) / divisors.x
+			var ay = evothings.util.littleEndianToInt16(data, 2) / divisors.y
+			var az = evothings.util.littleEndianToInt16(data, 4) / divisors.z
 			// Return result.
 			return { x: ax, y: ay, z: az }
 		}
