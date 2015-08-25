@@ -35,7 +35,8 @@
 		 * @instance
 		 * @public
 		 */
-		instance.deviceModel = 'Neo-Gait-fkxjsx'
+		//instance.deviceModel = 'Neo-Gait-fkxjsx'
+		instance.deviceModel = 'Neo-Gait'
 
 		/**
 		 * Determine if a BLE device is a SensorTag CC2650.
@@ -47,8 +48,9 @@
 		{
 			return (device != null) &&
 				(device.advertisementData != null) &&
-				(device.advertisementData.kCBAdvDataLocalName ==
-					'Neo-Gait-fkxjsx')
+				//(device.advertisementData.kCBAdvDataLocalName ==
+				//	'Neo-Gait-fkxjsx')
+            device.advertisementData.kCBAdvDataLocalName.match("Neo-Gait") 
 		}
 
 		/**
@@ -334,7 +336,7 @@
 			var ay = evothings.util.littleEndianToInt16(data, 8) / divisors.y
 			var az = evothings.util.littleEndianToInt16(data, 10) / divisors.z
         */
-			var divisors = {x: 2000, y: 2000, z: 2000}
+			var divisors = {x: 1000, y: 1000, z: 1000}
 
 			// Calculate accelerometer values.
 			var ax = evothings.util.littleEndianToInt16(data, 0) / divisors.x

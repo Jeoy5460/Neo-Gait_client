@@ -39,7 +39,18 @@
 			.accelerometerCallback(accelerometerHandler, 1000)
 			.luxometerCallback(luxometerHandler, 1000)
 	}
-
+    function ng_clean()
+    {
+       //$('#flash_test').style.backgroundColor = 'white';
+            document.getElementById('flash_test').style.backgroundColor ='white' 
+            document.getElementById('green').style.backgroundColor ='white' 
+            document.getElementById('red').style.backgroundColor ='white' 
+            document.getElementById('blue').style.backgroundColor ='white' 
+            document.getElementById('breath').style.backgroundColor ='white' 
+            //document.getElementById('acc_z').style.backgroundColor ='white' 
+            //document.getElementById('gyro_y').style.backgroundColor ='white' 
+            document.getElementById('btn').style.backgroundColor ='white' 
+    }   
 	function connect()
 	{
 		sensortag.connectToNearestDevice()
@@ -49,6 +60,7 @@
 	{
 		sensortag.disconnectDevice()
 		resetSensorDisplayValues()
+        ng_clean()
 	}
 
 	function statusHandler(status)
@@ -102,17 +114,17 @@
 	{
 		// Clear current values.
 		var blank = '[Waiting for value]'
-		displayValue('StatusData', 'Press Connect to find a SensorTag')
+		displayValue('StatusData', 'Press Connect to find a Neo-Gait')
 		displayValue('DeviceModel', '?')
 		displayValue('FirmwareData', '?')
 		displayValue('KeypressData', blank)
-		displayValue('TemperatureData', blank)
+//		displayValue('TemperatureData', blank)
 		displayValue('AccelerometerData', blank)
-		displayValue('HumidityData', blank)
-		displayValue('MagnetometerData', blank)
-		displayValue('BarometerData', blank)
+//		displayValue('HumidityData', blank)
+//		displayValue('MagnetometerData', blank)
+//		displayValue('BarometerData', blank)
 		displayValue('GyroscopeData', blank)
-		displayValue('Angle', blank)
+		displayValue('flash', blank)
 
 		// Reset screen color.
 		setBackgroundColor('white')
@@ -162,7 +174,7 @@
 			'y: ' + (y >= 0 ? '+' : '') + y.toFixed(5) + 'G<br/>' +
 			'z: ' + (z >= 0 ? '+' : '') + z.toFixed(5) + 'G<br/>'
 
-        document.getElementById("acc_z").style.width = Math.abs(z.toFixed(2)*100)+"%" 
+        document.getElementById("acc_z").style.width = Math.abs((z/2.0).toFixed(2)*100)+"%" 
 		// Update the value displayed.
 		displayValue('AccelerometerData', string)
 	}
@@ -205,7 +217,7 @@
 			'x: ' + (x >= 0 ? '+' : '') + x.toFixed(5) + '<br/>' +
 			'y: ' + (y >= 0 ? '+' : '') + y.toFixed(5) + '<br/>' +
 			'z: ' + (z >= 0 ? '+' : '') + z.toFixed(5) + '<br/>'
-        var gyro_w = y/2000.0 
+        var gyro_w = y/40.0 
         document.getElementById("gyro_y").style.width = Math.abs((gyro_w).toFixed(2)*100)+"%" 
 
 		// Update the value displayed.
@@ -261,7 +273,13 @@
                 displayValue('KeypressData', "FAIL")
             
             }
-        } 
+        }else if (6 == value.item){
+            disp_test_result("acc_z",value.res)
+            
+        } else if (7 == value.item){
+            disp_test_result("gyro_y",value.res)
+        
+        }
         
             
 	}
