@@ -47,8 +47,8 @@
             document.getElementById('red').style.backgroundColor ='white' 
             document.getElementById('blue').style.backgroundColor ='white' 
             document.getElementById('breath').style.backgroundColor ='white' 
-            //document.getElementById('acc_z').style.backgroundColor ='white' 
-            //document.getElementById('gyro_y').style.backgroundColor ='white' 
+            document.getElementById('acc_z').style.backgroundColor ='white' 
+            document.getElementById('gyro_y').style.backgroundColor ='white' 
             document.getElementById('btn').style.backgroundColor ='white' 
     }   
 	function connect()
