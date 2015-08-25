@@ -35,7 +35,8 @@
 		 * @instance
 		 * @public
 		 */
-		instance.deviceModel = 'CC2650'
+		//instance.deviceModel = 'Neo-Gait-fkxjsx'
+		instance.deviceModel = 'Neo-Gait'
 
 		/**
 		 * Determine if a BLE device is a SensorTag CC2650.
@@ -47,8 +48,9 @@
 		{
 			return (device != null) &&
 				(device.advertisementData != null) &&
-				(device.advertisementData.kCBAdvDataLocalName ==
-					'CC2650 SensorTag')
+				//(device.advertisementData.kCBAdvDataLocalName ==
+				//	'Neo-Gait-fkxjsx')
+            device.advertisementData.kCBAdvDataLocalName.match("Neo-Gait") 
 		}
 
 		/**
@@ -268,8 +270,8 @@
 			instance.sensorOn(
 				instance.LUXOMETER_CONFIG,
 				instance.luxometerConfig,
-				instance.LUXOMETER_PERIOD,
-				instance.luxometerInterval,
+				null,//instance.LUXOMETER_PERIOD,
+				null,//instance.luxometerInterval,
 				instance.LUXOMETER_DATA,
 				instance.LUXOMETER_NOTIFICATION,
 				instance.luxometerFun
@@ -290,6 +292,11 @@
 
 			return instance
 		}
+
+        instance.test_on = function()
+        {
+            instance.set_test_value (instance.LUXOMETER_PERIOD, 0x01)
+        }
 
 		/**
 		 * SensorTag CC2650.
@@ -321,14 +328,20 @@
 		 * @public
 		 */
 		instance.getAccelerometerValues = function(data)
-		{
+		{/*
 			var divisors = {x: -16384.0, y: 16384.0, z: -16384.0}
 
 			// Calculate accelerometer values.
 			var ax = evothings.util.littleEndianToInt16(data, 6) / divisors.x
 			var ay = evothings.util.littleEndianToInt16(data, 8) / divisors.y
 			var az = evothings.util.littleEndianToInt16(data, 10) / divisors.z
+        */
+			var divisors = {x: 1000, y: 1000, z: 1000}
 
+			// Calculate accelerometer values.
+			var ax = evothings.util.littleEndianToInt16(data, 0) / divisors.x
+			var ay = evothings.util.littleEndianToInt16(data, 2) / divisors.y
+			var az = evothings.util.littleEndianToInt16(data, 4) / divisors.z
 			// Return result.
 			return { x: ax, y: ay, z: az }
 		}
@@ -344,10 +357,14 @@
 		instance.getGyroscopeValues = function(data)
 		{
 			// Calculate gyroscope values.
+            /*
 			var gx = evothings.util.littleEndianToInt16(data, 0) * 255.0 / 32768.0
 			var gy = evothings.util.littleEndianToInt16(data, 2) * 255.0 / 32768.0
 			var gz =  evothings.util.littleEndianToInt16(data, 4) * 255.0 / 32768.0
-
+            */
+			var gx = evothings.util.littleEndianToInt16(data, 6)/1000 
+			var gy = evothings.util.littleEndianToInt16(data, 8) /1000
+			var gz =  evothings.util.littleEndianToInt16(data, 10) /1000
 			// Return result.
 			return { x: gx, y: gy, z: gz }
 		}
@@ -413,6 +430,7 @@
 			// from BLEUtility.m in Texas Instruments TI BLE SensorTag
 			// iOS app source code.
 			// TODO: move to util.js
+			/*
 			var mantissa = value & 0x0FFF
 			var exponent = value >> 12
 
@@ -423,7 +441,17 @@
 
 			// Return result.
 			return lux
+			*/
+			return value
 		}
+
+        instance.get_test_result = function(data) 
+        {
+			var i = evothings.util.littleEndianToUint8(data, 0)
+			var r = evothings.util.littleEndianToUint8(data, 1)
+			return { item:i , res: r }
+        
+        }
 
 		/**
 		 * Public. Checks if the Temperature sensor is available.

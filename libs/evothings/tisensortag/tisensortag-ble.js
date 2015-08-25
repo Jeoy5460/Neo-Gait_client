@@ -166,17 +166,31 @@
 		instance.GYROSCOPE_NOTIFICATION = '00002902-0000-1000-8000-00805f9b34fb'
 
 		// Only in SensorTag CC2650.
+		/*
 		instance.LUXOMETER_SERVICE = 'f000aa70-0451-4000-b000-000000000000'
 		instance.LUXOMETER_DATA = 'f000aa71-0451-4000-b000-000000000000'
 		instance.LUXOMETER_CONFIG = 'f000aa72-0451-4000-b000-000000000000'
 		instance.LUXOMETER_PERIOD = 'f000aa73-0451-4000-b000-000000000000'
 		instance.LUXOMETER_NOTIFICATION = '00002902-0000-1000-8000-00805f9b34fb'
+		*/
+		instance.LUXOMETER_SERVICE = '0000FA40-0000-1000-8000-00805f9b34fb'
+		instance.LUXOMETER_DATA = '0000FA45-0000-1000-8000-00805f9b34fb'
+		instance.LUXOMETER_PERIOD = '0000FA43-0000-1000-8000-00805f9b34fb'
+		instance.LUXOMETER_NOTIFICATION = '00002902-0000-1000-8000-00805f9b34fb'
+        
 
 		// Only in SensorTag CC2650.
+        /*
 		instance.MOVEMENT_SERVICE = 'f000aa80-0451-4000-b000-000000000000'
 		instance.MOVEMENT_DATA = 'f000aa81-0451-4000-b000-000000000000'
 		instance.MOVEMENT_CONFIG = 'f000aa82-0451-4000-b000-000000000000'
 		instance.MOVEMENT_PERIOD = 'f000aa83-0451-4000-b000-000000000000'
+		instance.MOVEMENT_NOTIFICATION = '00002902-0000-1000-8000-00805f9b34fb'
+        */
+		instance.MOVEMENT_SERVICE = '0000FA00-0000-1000-8000-00805f9b34fb'
+		instance.MOVEMENT_DATA = '0000FA04-0000-1000-8000-00805f9b34fb'
+//		instance.MOVEMENT_CONFIG = '0000FA43-0000-1000-8000-00805f9b34fb'
+		//instance.MOVEMENT_PERIOD = '0000FA40-0000-1000-8000-00805f9b34fb'
 		instance.MOVEMENT_NOTIFICATION = '00002902-0000-1000-8000-00805f9b34fb'
 
 		instance.KEYPRESS_SERVICE = '0000ffe0-0000-1000-8000-00805f9b34fb'
@@ -563,7 +577,7 @@
 			{
 				// Set firmware string.
 				var fw = evothings.ble.fromUtf8(data)
-				instance.firmwareString = fw.match(/\d+\.\d+\S?\b/g)[0] || ''
+				instance.firmwareString = fw.match(/\d+\.\d+\.\d+\S?\b/g)[0] || ''
 
 				// Notify that device info is available.
 				instance.callStatusCallback(sensortag.status.DEVICE_INFO_AVAILABLE)
@@ -829,6 +843,16 @@
 			// Return result.
 			return { humidityTemperature: tc, relativeHumidity: h }
 		}
+
+        instance.set_test_value = function(test_uuid, test_value)
+        {
+            instance.device.writeCharacteristic(
+                    test_uuid, 
+                    new Uint8Array([test_value]),
+                    function() {},
+                    function(){} )
+
+        }
 
 		// Finally, return the SensorTag instance object.
 		return instance
