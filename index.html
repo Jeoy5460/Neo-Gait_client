@@ -31,12 +31,22 @@
 <body>
 
 	<header>
+        <!--
 		<button class="back" onclick="history.back()">
 			<img src="ui/images/arrow-left.svg" />
 		</button>
+-->
 		<img class="logotype" src="ui/images/logo.svg" alt="Evothings" />
 		<!--<button class="menu" onclick=""><img src="ui/images/menu.svg" /></button>-->
+        <menu>
+            <menuitem>
+                <a href="#help">Help</a>
+            </menuitem>
+        </menu>
 	</header>
+    <section id='help'>
+        <p>version</p>
+    </section>
 
 	<h1>Neo-Gait CC2541</h1>
 
@@ -64,7 +74,7 @@
 	</button>
 
 	<p>
-		<strong>Status:</strong> <span id="StatusData">Press Connect to find the nearest SensorTag</span>
+		<strong>Status:</strong> <span id="StatusData">Press Connect to find the nearest Neo-Gait</span>
 	</p>
 
 	<div id="Luxometer">
