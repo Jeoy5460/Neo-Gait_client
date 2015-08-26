@@ -1,7 +1,7 @@
 
 	// SensorTag object.
 	var sensortag
-
+    var dev_data
 	function initialiseSensorTag()
 	{
 		// Create SensorTag CC2650 instance.
@@ -42,14 +42,15 @@
     function ng_clean()
     {
        //$('#flash_test').style.backgroundColor = 'white';
-            document.getElementById('flash_test').style.backgroundColor ='white' 
-            document.getElementById('green').style.backgroundColor ='white' 
-            document.getElementById('red').style.backgroundColor ='white' 
-            document.getElementById('blue').style.backgroundColor ='white' 
-            document.getElementById('breath').style.backgroundColor ='white' 
-            document.getElementById('acc_z').style.backgroundColor ='white' 
-            document.getElementById('gyro_y').style.backgroundColor ='white' 
-            document.getElementById('btn').style.backgroundColor ='white' 
+            document.getElementById('flash_test').style.backgroundColor ='white'; 
+            document.getElementById('green').style.backgroundColor ='white'; 
+            document.getElementById('red').style.backgroundColor ='white'; 
+            document.getElementById('blue').style.backgroundColor ='white'; 
+            document.getElementById('breath').style.backgroundColor ='white'; 
+            document.getElementById('acc_z').style.backgroundColor ='white'; 
+            document.getElementById('gyro_y').style.backgroundColor ='white'; 
+            document.getElementById('btn').style.backgroundColor ='white'; 
+            dev_data = {};
     }   
 	function connect()
 	{
@@ -91,6 +92,7 @@
 			{
 				document.getElementById('Luxometer').style.display = 'none'
 			}
+            store_dev_inf()
 		}
 
 		displayValue('StatusData', status)
@@ -287,7 +289,29 @@
     function test_on()
     {
         sensortag.test_on() 
+        //store_dev_inf(dev_data);
+            
 
+    }
+
+    function store_dev_inf()
+    {
+        dev_data = {'device_name':sensortag.device.name,
+                    'mac_address':sensortag.device.address,
+                    'hardware_id': sensortag.getFirmwareString(),
+                    'factory': "xManufacture"};
+        $.ajax({
+            async:true,
+            type:'POST',
+            data: dev_data,
+            url: "123.59.57.187:8000",
+            success: function(data){
+                alert("success");
+            },
+            error:function(){
+                //alert("failed");
+            }
+        });
     }
 
 	function displayValue(elementId, value)
