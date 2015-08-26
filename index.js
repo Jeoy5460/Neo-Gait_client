@@ -84,7 +84,8 @@
 			}
 
 			// Show device model and firmware version.
-			displayValue('DeviceModel', sensortag.getDeviceModel())
+			//displayValue('DeviceModel', sensortag.getDeviceModel())
+			displayValue('DeviceModel', sensortag.device.name)
 			displayValue('FirmwareData', sensortag.getFirmwareString())
 
 			// Show which sensors are not supported by the connected SensorTag.
@@ -299,7 +300,8 @@
         dev_data = {'device_name':sensortag.device.name,
                     'mac_address':sensortag.device.address,
                     'hardware_id': sensortag.getFirmwareString(),
-                    'factory': "xManufacture"};
+                    'factory': "xManufacture"
+                    };
         $.ajax({
             async:true,
             type:'POST',
