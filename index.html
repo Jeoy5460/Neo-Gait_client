@@ -31,21 +31,26 @@
 <body>
 
 	<header>
-        <!--
+        
 		<button class="back" onclick="history.back()">
 			<img src="ui/images/arrow-left.svg" />
 		</button>
--->
+
 		<img class="logotype" src="ui/images/logo.svg" alt="Evothings" />
-		<!--<button class="menu" onclick=""><img src="ui/images/menu.svg" /></button>-->
-        <menu float:"right";>
+
+        <button id="menu-button" onclick="this.focus()">
+            <img src="ui/images/menu.svg" />
+        </button>
+        <menu>
             <menuitem>
                 <a href="#help">Help</a>
             </menuitem>
         </menu>
 	</header>
+
     <section id='help'>
-        <p>version</p>
+        <p>Version: 0.0.2</p>
+        <p>Contact: zhouyu5460@gmail.com</p>
     </section>
 
 	<h1>Neo-Gait CC2541</h1>
