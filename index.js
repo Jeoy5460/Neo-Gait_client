@@ -316,7 +316,13 @@
                 //alert("success");
             },
             error:function(jqXHR, exception){
-                alert("Error Code: " + jqXHR.status + " (Network Error)");
+                if (jqXHR.status != 200){
+                    displayValue('st_net', "Network Error(code:" + jqXHR.status + ")")
+                } else {
+                    displayValue('st_net', "OK (code: " + jqXHR.status + ")")
+                
+                }
+                //alert("Error Code: " + jqXHR.status + " (Network Error)");
             }
         });
     }
