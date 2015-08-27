@@ -1,6 +1,6 @@
-[ -d ng-android ] || cordova create ng-android
-rsync -av --progress ./* ./ng-android/www  --exclude build.sh --exclude ng-android --exclude neo_client.npp
-cd ng-android
+[ -d ng_android ] || cordova create ng_android
+rsync -av --progress ./* ./ng_android/www  --exclude build.sh --exclude ng_android --exclude neo_client.npp
+cd ng_android
 echo "adding android"
 cordova platforms add android
 echo "adding plugins"
@@ -10,4 +10,4 @@ cordova plugin add com.evothings.ble
 echo "building android"
 cordova build android
 #adb install -r platforms/android/ant-build/demoapp.apk
-#adb install -r platforms/android/build/outputs/apk/android-debug.apk
+adb install -r /home/zhouyu/projs/ng_client/ng_android/platforms/android/build/outputs/apk/android-debug.apk

@@ -290,28 +290,33 @@
     function test_on()
     {
         sensortag.test_on() 
-        //store_dev_inf(dev_data);
             
-
     }
 
     function store_dev_inf()
     {
-        dev_data = {'device_name':sensortag.device.name,
-                    'mac_address':sensortag.device.address,
-                    'hardware_id': sensortag.getFirmwareString(),
-                    'factory': "xManufacture"
+        dev_data = {"name":sensortag.device.name,
+                    'mac':sensortag.device.address,
+                    'version': sensortag.getFirmwareString(),
+                    'factory': "上达"
                     };
+        //var formd = new FormData();
+        //formd.append("name", "Robert");
+        //formd.append("mac", "Robert");
         $.ajax({
             async:true,
-            type:'POST',
-            data: dev_data,
-            url: "123.59.57.187:8000",
+            crossOrigin: true,
+            type:"POST",
+            dataType: "json",
+            data:JSON.stringify(dev_data), 
+            url: "http://123.59.57.67:8000",
+            //url: "http://23.244.68.75:9000/add",
+            //contentType: "application/json; charset=utf-8",
             success: function(data){
-                alert("success");
+                //alert("success");
             },
-            error:function(){
-                //alert("failed");
+            error:function(jqXHR, exception){
+                alert("Error Code: " + jqXHR.status + " (Network Error)");
             }
         });
     }
