@@ -128,6 +128,7 @@
 //		displayValue('BarometerData', blank)
 		displayValue('GyroscopeData', blank)
 		displayValue('flash', blank)
+		displayValue('pdm', blank)
 
 		// Reset screen color.
 		setBackgroundColor('white')
@@ -226,7 +227,8 @@
 		// Update the value displayed.
 		displayValue('GyroscopeData', string)
 	}
-
+    var pack_sync  = 0
+    var is_steps  = 0
 	function luxometerHandler(data)
 	{
 		//var value = sensortag.getLuxometerValue(data)
@@ -282,10 +284,77 @@
         } else if (7 == value.item){
             disp_test_result("gyro_y",value.res)
         
-        }
+        } else if (10 == value.item){
+            pack_data = sensortag.get_log_pack(data)
+            displayValue("pdm", pack_data.res)
         
+        } else if (11 == value.item){
+            pack_sync = 1;
+
+        } else if (12 == value.item){
+            if (pack_sync == 1){
             
+                pack_data = sensortag.get_log_pack(data)
+                //is_steps = (is_steps+1)%2;
+                //if (is_steps == 0){
+          //          drawDiagram({x:pack_data.res})
+                    drawGraph (pack_data.res)
+                    displayValue("pdm", pack_data.res)
+                //        alert(pack_data.res)
+                //}
+            }
+        } else if (13 == value.item){
+            pack_sync =0;
+            //displayValue("pdm", 02)
+        
+        }
+
 	}
+
+    d1 = [];
+    
+    // Pre-pad the arrays with 100 null values
+    for (var i=0; i< 100; ++i) {
+        d1.push(null);
+    }
+
+    function getGraph(id, d1)
+    {
+        //var graph = new RGraph.Line(id, d1, d2);
+        var graph = new RGraph.Line(id, d1);
+        graph.Set('chart.background.barcolor1', 'white');
+        graph.Set('chart.background.barcolor2', 'white');
+        graph.Set('chart.title.xaxis', 'Time');
+        graph.Set('chart.filled', true);
+        graph.Set('chart.fillstyle', ['#daf1fa', '#faa']);
+        graph.Set('chart.colors', ['rgb(169, 222, 244)', 'red']);
+        graph.Set('chart.linewidth', 3);
+        graph.Set('chart.ymax', 800);
+        graph.Set('chart.xticks', 25);
+        graph.Set('chart.gutterLeft', 30);
+
+        return graph;
+    }
+    
+    function drawGraph (e)
+    {
+        // Clear the canvas and redraw the chart
+        RGraph.Clear(document.getElementById("cvs"));
+        var graph = getGraph('cvs', d1);
+        graph.Draw();
+        
+        // Add some data to the data arrays
+        //d1.push(RGraph.random(5, 10));
+        //d2.push(RGraph.random(5, 10));
+        d1.push(e);
+        
+        // Get rid of the first values of the arrays
+        if (d1.length > 100) {
+            d1 = RGraph.array_shift(d1);
+        }
+        //setTimeout(drawGraph,25);
+
+    }
 
     function test_on()
     {
@@ -293,9 +362,16 @@
             
     }
 
+    function sync_on()
+    {
+        sensortag.sync_on()
+
+    }
+
     function store_dev_inf()
     {
-        dev_data = {"name":sensortag.device.name,
+        dev_data = {
+                    "name":sensortag.device.name,
                     'mac':sensortag.device.address,
                     'version': sensortag.getFirmwareString(),
                     'factory': "上达"
@@ -310,7 +386,6 @@
             dataType: "json",
             data:JSON.stringify(dev_data), 
             url: "http://123.59.57.67:8000",
-            //url: "http://23.244.68.75:9000/add",
             //contentType: "application/json; charset=utf-8",
             success: function(data){
                 //alert("success");
@@ -340,8 +415,58 @@
             document.getElementById(elem_id).style.backgroundColor ='red' 
         }
     }
+    dataPoints= []
 
+    function drawDiagram(values)
+    {
+        var canvas = document.getElementById('canvas');
+        var context = canvas.getContext('2d');
 
+        // Add recent values.
+        dataPoints.push(values);
+
+        // Remove data points that do not fit the canvas.
+        if (dataPoints.length > canvas.width)
+        {
+            dataPoints.splice(0, (dataPoints.length - canvas.width));
+        }
+
+        // Value is an accelerometer reading between -1 and 1.
+        function calcDiagramY(value)
+        {
+            // Return Y coordinate for this value.
+            var diagramY = value
+//                ((value * canvas.height) / 2)
+//                + (canvas.height / 2);
+            return diagramY;
+        }
+
+        function drawLine(axis, color)
+        {
+            context.strokeStyle = color;
+            context.beginPath();
+            var lastDiagramY = calcDiagramY(
+                dataPoints[dataPoints.length-1][axis]);
+            context.moveTo(0, lastDiagramY);
+            var x = 1;
+            for (var i = dataPoints.length - 2; i >= 0; i--)
+            {
+                var y = calcDiagramY(dataPoints[i][axis]);
+
+                context.lineTo(x, y);
+                x++;
+            }
+            context.stroke();
+        }
+
+        // Clear background.
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Draw lines.
+        drawLine('x', '#f00');
+        //drawLine('y', '#0f0');
+        //drawLine('z', '#00f');
+    }
 
 	function setBackgroundColor(color)
 	{

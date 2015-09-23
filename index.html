@@ -25,6 +25,9 @@
 	<script src="libs/evothings/evothings.js"></script>
 	<script src="libs/evothings/tisensortag/tisensortag.js"></script>
     <script src="libs/jquery/jquery.js"></script>
+    <script src="RGraph/libraries/RGraph.common.core.js" ></script>
+    <script src="RGraph/libraries/RGraph.line.js" ></script>
+    <script src="RGraph/libraries/RGraph.common.dynamic.js" ></script>
 	<script src="index.js"></script>
 </head>
 
@@ -78,6 +81,9 @@
         Device Test
 	</button>
 
+	<button onclick="sync_on()" class="blue">
+       Sync 
+	</button>
 	<p>
 		<strong>Ble Status:</strong> <span id="StatusData">Press Connect to find the nearest Neo-Gait</span>
 	</p>
@@ -85,6 +91,9 @@
     <p>
     <strong>Network Status:</strong> <span id="st_net"></span>
     </p>
+    <div style="position: relative">
+        <canvas id="cvs" width="300" height="150"></canvas> 
+    </div>
 
 	<div id="Luxometer">
 		<h2>Flash Test:</h2>
@@ -119,6 +128,32 @@
 
 	</p>
 
+    <h2>Pedometer</h2>
+    <p>
+		<span id="pdm">[Waiting for value]</span>
+        
+    </p>
+    <h2>Steps</h2>
+
+
+<script>
+    jQuery(document).ready(function ()
+    {
+//        drawGraph ()
+        /*
+        // This is the code that produces the chart
+        var yaxis = new RGraph.Drawing.YAxis({
+            id: 'cvs',
+            x: 40,
+            options: {
+                //max: line.max,
+                colors: ['black'],
+                title: 'A static Y axis'
+            }
+        }).draw();
+        */
+    });
+</script>
 
 
 	<h2>Device info:</h2>
@@ -126,7 +161,6 @@
 	    Device model: <span id="DeviceModel">?</span><br />
 		Firmware version: <span id="FirmwareData">?</span>
 	</p>
-
 
 </body>
 

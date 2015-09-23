@@ -298,6 +298,11 @@
             instance.set_test_value (instance.LUXOMETER_PERIOD, 0x01)
         }
 
+        instance.sync_on = function()
+        {
+            instance.set_test_value (instance.LUXOMETER_PERIOD, 0x02)
+        }
+
 		/**
 		 * SensorTag CC2650.
 		 * Calculate temperature values from raw data.
@@ -449,6 +454,13 @@
         {
 			var i = evothings.util.littleEndianToUint8(data, 0)
 			var r = evothings.util.littleEndianToUint8(data, 1)
+			return { item:i , res: r }
+        
+        }
+        instance.get_log_pack = function(data)
+        {
+			var i = evothings.util.littleEndianToUint32(data, 0)
+			var r = evothings.util.littleEndianToUint32(data, 1)
 			return { item:i , res: r }
         
         }
