@@ -243,22 +243,22 @@
                 displayValue('flash', "FAIL")
             
             }
-            sensortag.led_red() 
+            setTimeout(function(){ sensortag.led_red() }, 1000);
         } else if (0x02 == value.item) {
 
             disp_test_result("red",value.res)
-            sensortag.led_green() 
+            setTimeout(function(){ sensortag.led_green() }, 3000);
 
         } else if (0x03 == value.item){
 
             disp_test_result("green",value.res)
-            sensortag.led_blue() 
+            setTimeout(function(){ sensortag.led_blue() }, 3000);
         
         } else if (0x04 == value.item){
 
             disp_test_result("blue",value.res)
-            sensortag.led_breath() 
-        
+            setTimeout(function(){ sensortag.led_breath() }, 3000);
+                    
         } else if (0x05 == value.item){
 
             disp_test_result("breath",value.res)

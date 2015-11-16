@@ -302,12 +302,12 @@
             instance.set_test_value (instance.LUXOMETER_PERIOD, 0x02)
         }
 
-        instance.led_blue = function()
+        instance.led_green = function()
         {
             instance.set_test_value (instance.LUXOMETER_PERIOD, 0x03)
         }
 
-        instance.led_green = function()
+        instance.led_blue = function()
         {
             instance.set_test_value (instance.LUXOMETER_PERIOD, 0x04)
         }
@@ -319,7 +319,8 @@
 
         instance.mpu = function()
         {
-            instance.set_test_value (instance.LUXOMETER_PERIOD, 0x07)
+		//instance.MOVEMENT_SERVICE = '0000FA00-0000-1000-8000-00805f9b34fb'
+            instance.set_test_value (instance.MOVEMENT_CONFIG, 0xF0)
         }
 
         instance.sync_on = function()
