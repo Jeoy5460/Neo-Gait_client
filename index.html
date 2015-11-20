@@ -13,13 +13,17 @@
 	<title>Neo-Gait CC2541 </title>
 
 	<style>
-		@import 'ui/css/evothings-app.css';
+		//@import 'ui/css/evothings-app.css';
 	</style>
 
 	<script>
 	// Redirect console.log to Evothings Workbench.
 	if (window.hyper && window.hyper.log) { console.log = hyper.log }
 	</script>
+
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css">
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
 
 	<script src="cordova.js"></script>
 	<script src="libs/evothings/evothings.js"></script>
@@ -33,40 +37,24 @@
 
 <body>
 
-	<header>
-        
-		<button class="back" onclick="history.back()">
-			<img src="ui/images/arrow-left.svg" />
-		</button>
-
-		<img class="logotype" src="ui/images/logo.svg" alt="Evothings" />
-
-        <button id="menu-button" onclick="this.focus()">
-            <img src="ui/images/menu.svg" />
-        </button>
-        <menu>
-            <menuitem>
-                <a href="#help">Help</a>
-            </menuitem>
-        </menu>
-	</header>
-
-    <section id='help'>
-        <p>Version: 0.0.3</p>
-        <p>Contact: zhouyu5460@gmail.com</p>
-    </section>
-
+<div data-role="page">
+    <div data-role="header">
+            <h1>EVO</h1>
+            <a href="#nav-panel" class="ui-btn-left " data-icon="bars" data-iconpos="notext">Menu<a>
+    </div>
+    <div data-role="panel" data-display="overlay" data-theme="b" id="nav-panel" >
+            <ul data-role="listview">
+                <li data-icon="delete"><a href="#" data-rel="close">Close Menu</a></li>
+                <li><a href="#pg_sync">sync</a></li>
+            </ul>
+    </div>
+    <div data-role="content">
 	<h1>Neo-Gait CC2541</h1>
 
 	<img src="neo-gait.png"
 		style="float:right;width:120px;height:auto;"/>
-
 	<p>
 		This is a testing device program working with the <strong>Neo-Gait CC2541</strong>.
-	</p>
-
-	<p id="upgradeNotice" class="hidden">
-		<span class="color_softred">Please upgrade the firmware of your SensorTag.</span>
 	</p>
 
 	<button onclick="connect()" class="green">
@@ -81,9 +69,6 @@
         Device Test
 	</button>
 
-	<button onclick="sync_on()" class="blue">
-       Sync 
-	</button>
 	<p>
 		<strong>Ble Status:</strong> <span id="StatusData">Press Connect to find the nearest Neo-Gait</span>
 	</p>
@@ -91,16 +76,7 @@
     <p>
     <strong>Network Status:</strong> <span id="st_net"></span>
     </p>
-    <h2>Pedometer</h2>
-    <p>
-		<span id="pdm">[Waiting for value]</span>
-        
-    </p>
-    <h2>Steps</h2>
-    <div style="position: relative">
-        <canvas id="cvs" width="300" height="150"></canvas> 
-    </div>
-
+    
 	<div id="Luxometer">
 		<h2>Flash Test:</h2>
 		<p>
@@ -133,8 +109,34 @@
         <div id="gyro_y" style=height:10px;width:0px;background:red> </div>
 
 	</p>
+    <h2>Device info:</h2>
+	<p>
+	    Device model: <span id="DeviceModel">?</span><br />
+		Firmware version: <span id="FirmwareData">?</span>
+	</p>
 
+    </div>
+    </div>
 
+<div data-role="page" id="pg_sync">
+    <div data-role="header" >
+            <a href="#"  data-icon="arrow-l" data-iconpos="notext" data-add-back-btn="true" data-rel="back">back<a>
+    </div>
+    <div data-role="content">
+        <h1></h1>
+        <button onclick="sync_on()" class="blue">
+           Sync 
+        </button>
+        <h2>Pedometer</h2>
+        <p>
+            <span id="pdm">[Waiting for value]</span>
+        </p>
+        <h2>Steps</h2>
+        <div style="position: relative">
+            <canvas id="cvs" width="300" height="150"></canvas> 
+        </div>
+    </div>
+</div>
 
 <script>
     jQuery(document).ready(function ()
@@ -156,12 +158,7 @@
 </script>
 
 
-	<h2>Device info:</h2>
-	<p>
-	    Device model: <span id="DeviceModel">?</span><br />
-		Firmware version: <span id="FirmwareData">?</span>
-	</p>
-
+	
 </body>
 
 </html>
