@@ -316,7 +316,7 @@
         graph.Set('chart.fillstyle', ['#daf1fa', '#faa']);
         graph.Set('chart.colors', ['rgb(169, 222, 244)', 'red']);
         graph.Set('chart.linewidth', 3);
-        graph.Set('chart.ymax', 800);
+        graph.Set('chart.ymax', 300);
         graph.Set('chart.xticks', 25);
         graph.Set('chart.gutterLeft', 30);
 
