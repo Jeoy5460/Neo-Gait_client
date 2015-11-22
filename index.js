@@ -235,7 +235,6 @@
 		//var value = sensortag.getLuxometerValue(data)
         value = sensortag.get_test_result(data)
         if (0x01 == value.item ){
-        
             disp_test_result("flash_test", value.res)
             if (1 == value.res){
                 displayValue('flash', "PASS")
