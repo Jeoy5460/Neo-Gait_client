@@ -74,9 +74,6 @@
         Device Test
 	</button>
 
-	<button onclick="sync_on()" class="blue">
-       Sync 
-	</button>
 	<p>
 		<strong>Ble Status:</strong> <span id="StatusData">Press Connect to find the nearest Neo-Gait</span>
 	</p>
@@ -84,16 +81,7 @@
     <p>
     <strong>Network Status:</strong> <span id="st_net"></span>
     </p>
-    <h2>Pedometer</h2>
-    <p>
-		<span id="pdm">[Waiting for value]</span>
         
-    </p>
-    <h2>Steps</h2>
-    <div style="position: relative">
-        <canvas id="cvs" width="300" height="150"></canvas> 
-    </div>
-
 	<div id="Luxometer">
 		<h2>Flash Test:</h2>
 		<p>
@@ -135,7 +123,25 @@
     </div>
     </div>
 
-
+<div data-role="page" id="pg_sync">
+    <div data-role="header" >
+            <a href="#"  data-icon="arrow-l" data-iconpos="notext" data-add-back-btn="true" data-rel="back">back<a>
+    </div>
+    <div data-role="content">
+        <h1></h1>
+        <button onclick="sync_on()" class="blue">
+           Sync 
+        </button>
+        <h2>Pedometer</h2>
+        <p>
+            <span id="pdm">[Waiting for value]</span>
+        </p>
+        <h2>Steps</h2>
+        <div style="position: relative">
+            <canvas id="cvs" width="300" height="150"></canvas> 
+        </div>
+    </div>
+</div>
 <script>
     jQuery(document).ready(function ()
     {
