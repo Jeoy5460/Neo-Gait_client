@@ -233,9 +233,18 @@
 	{
 		//var value = sensortag.getLuxometerValue(data)
         value = sensortag.get_test_result(data)
-        if (0x01 == value.item ){
+
+		// Prepare the information to display.
+		//string = "test"
+			//'raw: <span style="font-family: monospace;">0x' +
+			//	bufferToHexStr(data, 0, 2) + '</span><br/>' +
+			//'degree: ' + (value/100.0).toPrecision(5) + '<br/>'
+		// Update the value displayed.
+
+		//console.log('item: ' + value.item)
+        if (0 == value.item ){
         
-            disp_test_result("flash_test", value.res)
+            disp_test_result("flash_test",value.res)
             if (1 == value.res){
                 displayValue('flash', "PASS")
             
@@ -243,27 +252,23 @@
                 displayValue('flash', "FAIL")
             
             }
-            setTimeout(function(){ sensortag.led_red() }, 1000);
-        } else if (0x02 == value.item) {
+        } else if (1 == value.item) {
 
             disp_test_result("red",value.res)
-            setTimeout(function(){ sensortag.led_green() }, 3000);
 
-        } else if (0x03 == value.item){
+        } else if (2 == value.item){
 
             disp_test_result("green",value.res)
-            setTimeout(function(){ sensortag.led_blue() }, 3000);
         
-        } else if (0x04 == value.item){
+        } else if (3 == value.item){
 
             disp_test_result("blue",value.res)
-            setTimeout(function(){ sensortag.led_breath() }, 3000);
-                    
-        } else if (0x05 == value.item){
+        
+        } else if (4 == value.item){
 
             disp_test_result("breath",value.res)
         
-        } else if (0x06 == value.item){
+        } else if (5 == value.item){
         
             disp_test_result("btn",value.res)
             if (1 == value.res){
@@ -273,26 +278,34 @@
                 displayValue('KeypressData', "FAIL")
             
             }
-            sensortag.mpu() 
+        }else if (6 == value.item){
+            disp_test_result("acc_z",value.res)
+            
+        } else if (7 == value.item){
+            disp_test_result("gyro_y",value.res)
+        
         } else if (10 == value.item){
             pack_data = sensortag.get_log_pack(data)
             displayValue("pdm", pack_data.res)
         
         } else if (11 == value.item){
             pack_sync = 1;
-            is_steps = 0;
+
         } else if (12 == value.item){
             if (pack_sync == 1){
             
                 pack_data = sensortag.get_log_pack(data)
-                is_steps = (is_steps+1)%2;
-                if (is_steps == 0){
+                //is_steps = (is_steps+1)%2;
+                //if (is_steps == 0){
+          //          drawDiagram({x:pack_data.res})
                     drawGraph (pack_data.res)
                     displayValue("pdm", pack_data.res)
-                }
+                //        alert(pack_data.res)
+                //}
             }
         } else if (13 == value.item){
             pack_sync =0;
+            //displayValue("pdm", 02)
         
         }
 
@@ -345,7 +358,7 @@
 
     function test_on()
     {
-        sensortag.flash_test() 
+        sensortag.test_on() 
             
     }
 

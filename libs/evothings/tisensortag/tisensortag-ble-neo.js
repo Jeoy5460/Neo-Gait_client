@@ -292,42 +292,11 @@
 
 			return instance
 		}
-        instance.flash_test = function()
+
+        instance.test_on = function()
         {
             instance.set_test_value (instance.LUXOMETER_PERIOD, 0x01)
         }
-
-        instance.led_red = function()
-        {
-            instance.set_test_value (instance.LUXOMETER_PERIOD, 0x02)
-        }
-
-        instance.led_green = function()
-        {
-            instance.set_test_value (instance.LUXOMETER_PERIOD, 0x03)
-        }
-
-        instance.led_blue = function()
-        {
-            instance.set_test_value (instance.LUXOMETER_PERIOD, 0x04)
-        }
-
-        instance.led_breath = function()
-        {
-            instance.set_test_value (instance.LUXOMETER_PERIOD, 0x05)
-        }
-
-        instance.mpu = function()
-        {
-		//instance.MOVEMENT_SERVICE = '0000FA00-0000-1000-8000-00805f9b34fb'
-            instance.set_test_value (instance.MOVEMENT_CONFIG, 0xF0)
-        }
-
-        instance.sync_on = function()
-        {
-            instance.set_test_value (instance.LUXOMETER_PERIOD, 0x00)
-        }
-
 
         instance.sync_on = function()
         {

@@ -9,178 +9,20 @@
 	<meta name="format-detection" content="telephone=no" />
 	<meta name="viewport" content="width=device-width, user-scalable=no
 		initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css">
-    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
 
 	<title>Neo-Gait CC2541 </title>
+
 	<style>
-    <!--	@import 'ui/css/evothings-app.css';-->
-    .slideout-menu {
-        position: fixed;
-        top: 0;
-        left: -250px;
-        width: 250px;
-        height: 100%;
-        background: #333;
-        z-index: 100;
-    }
-    .slideout-menu h3 {
-        position: relative;
-        padding: 12px 10px;
-        color: #fff;
-        font-size: 1.2em;
-        font-weight: 400;
-        border-bottom: 4px solid #222;
-    }
-    .slideout-menu .slideout-menu-toggle {
-        position: absolute;
-        top: 12px;
-        right: 10px;
-        display: inline-block;
-        padding: 6px 9px 5px;
-        font-family: Arial, sans-serif;
-        font-weight: bold;
-        line-height: 1;
-        background: #222;
-        color: #999;
-        text-decoration: none;
-        vertical-align: top;
-    }
-    .slideout-menu .slideout-menu-toggle:hover {
-        color: #fff;
-    }
-    .slideout-menu ul {
-        list-style: none;
-        font-weight: 300;
-        border-top: 1px solid #151515;
-        border-bottom: 1px solid #454545;
-    }
-    .slideout-menu ul li {
-        border-top: 1px solid #454545;
-        border-bottom: 1px solid #151515;
-    }
-    .slideout-menu ul li a {
-        position: relative;
-        display: block;
-        padding: 10px;
-        color: #999;
-        text-decoration: none;
-    }
-    .slideout-menu ul li a:hover {
-        background: #000;
-        color: #fff;
-    }
-    .slideout-menu ul li a i {
-        position: absolute;
-        top: 15px;
-        right: 10px;
-        opacity: .5;
-    }
-    
-    .header {
-        padding: 15px;
-        background: #000;
-    }
-    .header .slideout-menu-toggle {
-        font-size: 1.2em;
-        color: #999;
-        text-decoration: none;
-    }
-    .header .slideout-menu-toggle:hover {
-        color: #fff;
-    }
-    .header .slideout-menu-toggle i {
-        vertical-align: top;
-        margin: 5px 3px 0 0;
-    }
-    
-    .content {
-        width: 60%;
-        margin: 50px auto;
-        padding: 20px;
-        background: rgba(0, 0, 0, .75);
-    }
-    .content h1 {
-        font-weight: 400;
-        text-transform: uppercase;
-        margin: 0;
-    }
-    .content h2 {
-        font-weight: 400;
-        text-transform: uppercase;
-        color: #fff;
-        margin: 0 0 20px;
-    }
-    .content p {
-        font-size: 1em;
-        font-weight: 300;
-        line-height: 1.5em;
-        color: #eee;
-        margin: 0 0 20px;
-    }
-    .content p:last-child {
-        margin: 0;
-    }
-    .content a.button {
-        display: inline-block;
-        padding: 10px 20px;
-        background: #ff0;
-        color: #000;
-        text-decoration: none;
-    }
-    .content a.button:hover {
-        background: #000;
-        color: #ff0;
-    }
-    .content.yellow {
-        position: relative;
-        background: #ff0;
-    }
-    .content.yellow h1 {
-        color: #000;
-    }
-    .content.yellow h1 span.demo {
-        display: inline-block;
-        font-size: .5em;
-        padding: 5px 10px;
-        background: #000;
-        color: #ff0;
-        vertical-align: top;
-        margin: 7px 0 0;
-    }
-    .content.yellow .back-to-article {
-        position: absolute;
-        bottom: -20px;
-        left: 20px;
-    }
-    .content.yellow .back-to-article a {
-        padding: 10px 20px;
-        background: #f60;
-        color: #fff;
-        text-decoration: none;
-    }
-    .content.yellow .back-to-article a:hover {
-        background: #f90;
-    }
-    .content.yellow .back-to-article a i {
-        margin-left: 5px;
-    }
-    .content.black {
-        background: #000;
-    }
-    .content.black p {
-        color: #999;
-    }
-    .content.black p a {
-        color: #08c;
-    }
+		//@import 'ui/css/evothings-app.css';
 	</style>
 
 	<script>
 	// Redirect console.log to Evothings Workbench.
 	if (window.hyper && window.hyper.log) { console.log = hyper.log }
 	</script>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css">
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
 
 	<script src="cordova.js"></script>
 	<script src="libs/evothings/evothings.js"></script>
@@ -194,42 +36,19 @@
 
 <body>
 
-	<header>
-        
-		<button class="back" onclick="history.back()">
-			<img src="ui/images/arrow-left.svg" />
-		</button>
-
-		<img class="logotype" src="ui/images/logo.svg" alt="Evothings" />
-
-        <button id="menu-button" onclick="this.focus()">
-            <img src="ui/images/menu.svg" />
-        </button>
-        <menu>
-            <menuitem>
-                <a href="#help">Help</a>
-            </menuitem>
-        </menu>
-	</header>
-
-    <section id='help'>
-        <p>Version: 0.0.3</p>
-        <p>Contact: zhouyu5460@gmail.com</p>
-    </section>
-<div class="slideout-menu">
-    <h3>Menu <a href="#" class="slideout-menu-toggle">&times;</a></h3>
-    <ul>
-        <li><a href="#">Home <i class="fa fa-angle-right"></i></a></li>
-        <li><a href="#">Tour Information <i class="fa fa-angle-right"></i></a></li>
-        <li><a href="#">Tour Pricing <i class="fa fa-angle-right"></i></a></li>
-        <li><a href="#">Photo Gallery <i class="fa fa-angle-right"></i></a></li>
-        <li><a href="#">News &amp; Events <i class="fa fa-angle-right"></i></a></li>
-    </ul>
-</div>
-
-
-<div data-role="page" id="page1">
-    <div data-role="main" class = "ui-content">
+<div data-role="page">
+    <div data-role="header">
+            <h1>EVO</h1>
+            <a href="#nav-panel" class="ui-btn-left " data-icon="bars" data-iconpos="notext">Menu<a>
+    </div>
+    <div data-role="panel" data-display="overlay" data-theme="b" id="nav-panel" >
+            <ul data-role="listview">
+                <li data-icon="delete"><a href="#" data-rel="close">Close Menu</a></li>
+                <li><a href="#pg_sync">sync</a></li>
+            </ul>
+    </div>
+ 
+    <div data-role="content">
 	<h1>Neo-Gait CC2541</h1>
 
 	<img src="neo-gait.png"
@@ -242,7 +61,7 @@
 	<p id="upgradeNotice" class="hidden">
 		<span class="color_softred">Please upgrade the firmware of your SensorTag.</span>
 	</p>
-<a class="slideout-menu-toggle" >toggle</a>
+
 	<button onclick="connect()" class="green">
 		Connect
 	</button>
@@ -307,39 +126,20 @@
         <div id="gyro_y" style=height:10px;width:0px;background:red> </div>
 
 	</p>
-
-
 	<h2>Device info:</h2>
 	<p>
 	    Device model: <span id="DeviceModel">?</span><br />
 		Firmware version: <span id="FirmwareData">?</span>
 	</p>
+
     </div>
     </div>
 
+
 <script>
-$(document).ready(function () {
-    $('.slideout-menu-toggle').on('click', function(event){
-        event.preventDefault();
-        // create menu variables
-        var slideoutMenu = $('.slideout-menu');
-        var slideoutMenuWidth = $('.slideout-menu').width();
-        
-        // toggle open class
-        slideoutMenu.toggleClass("open");
-        
-        // slide menu
-        if (slideoutMenu.hasClass("open")) {
-            slideoutMenu.animate({
-                left: "0px"
-            }); 
-        } else {
-            slideoutMenu.animate({
-                left: -slideoutMenuWidth
-            }, 250);    
-        }
+    jQuery(document).ready(function ()
+    {
     });
-});
 </script>
 
 
