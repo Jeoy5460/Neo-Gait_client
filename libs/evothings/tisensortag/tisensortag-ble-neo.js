@@ -161,7 +161,8 @@
 			instance.movementFun = fun
 
  			// Set the config that turns on the needed sensors.
-			instance.movementConfig = [sensors, 0]
+			//instance.movementConfig = [sensors, 0]
+			instance.movementConfig = [0x07]
 			instance.movementInterval = interval
 			instance.requiredServices.push(instance.MOVEMENT_SERVICE)
 
@@ -196,12 +197,12 @@
 			//sensortag.logServices(instance.device)
 			//console.log('---------------------- END -----------------------')
 
-			instance.temperatureOn()
-			instance.humidityOn()
-			instance.barometerOn()
+			//instance.temperatureOn()
+			//instance.humidityOn()
+			//instance.barometerOn()
 			instance.luxometerOn()
 			instance.movementOn()
-			instance.keypressOn()
+			//instance.keypressOn()
 		}
 
 		/**
@@ -236,8 +237,8 @@
 			instance.sensorOn(
 				instance.MOVEMENT_CONFIG,
 				instance.movementConfig,
-				instance.MOVEMENT_PERIOD,
-				instance.movementInterval,
+				null,//instance.MOVEMENT_PERIOD,
+				null,//instance.movementInterval,
 				instance.MOVEMENT_DATA,
 				instance.MOVEMENT_NOTIFICATION,
 				instance.movementFun
@@ -317,10 +318,9 @@
             instance.set_test_value (instance.LUXOMETER_PERIOD, 0x05)
         }
 
-        instance.mpu = function()
+        instance.angle = function()
         {
-		//instance.MOVEMENT_SERVICE = '0000FA00-0000-1000-8000-00805f9b34fb'
-            instance.set_test_value (instance.MOVEMENT_CONFIG, 0xF0)
+            instance.set_test_value (instance.MOVEMENT_CONFIG, 0x07)
         }
 
         instance.sync_on = function()
@@ -369,11 +369,8 @@
 			var divisors = {x: 1000, y: 1000, z: 1000}
 
 			// Calculate accelerometer values.
-			var ax = evothings.util.littleEndianToInt16(data, 0) / divisors.x
-			var ay = evothings.util.littleEndianToInt16(data, 2) / divisors.y
-			var az = evothings.util.littleEndianToInt16(data, 4) / divisors.z
-			// Return result.
-			return { x: ax, y: ay, z: az }
+			var angle = evothings.util.littleEndianToInt16(data, 0) /100
+			return angle
 		}
 
 		/**

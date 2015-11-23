@@ -34,8 +34,9 @@
 			.accelerometerCallback(accelerometerHandler, 1000)
 			.magnetometerCallback(magnetometerHandler, 1000)
 			.gyroscopeCallback(gyroscopeHandler, 1000)
-			*/
+			
 			.gyroscopeCallback(gyroscopeHandler, 1000)
+            */
 			.accelerometerCallback(accelerometerHandler, 1000)
 			.luxometerCallback(luxometerHandler, 1000)
 	}
@@ -121,11 +122,7 @@
 		displayValue('DeviceModel', '?')
 		displayValue('FirmwareData', '?')
 		displayValue('KeypressData', blank)
-//		displayValue('TemperatureData', blank)
 		displayValue('AccelerometerData', blank)
-//		displayValue('HumidityData', blank)
-//		displayValue('MagnetometerData', blank)
-//		displayValue('BarometerData', blank)
 		displayValue('GyroscopeData', blank)
 		displayValue('flash', blank)
 		displayValue('pdm', blank)
@@ -162,10 +159,7 @@
 	function accelerometerHandler(data)
 	{
 		// Calculate the x,y,z accelerometer values from raw data.
-		var values = sensortag.getAccelerometerValues(data)
-		var x = values.x
-		var y = values.y
-		var z = values.z
+		var x = sensortag.getAccelerometerValues(data)
 
 		//var model = sensortag.getDeviceModel()
 		//var dataOffset = (model == 2 ? 6 : 0)
@@ -174,11 +168,9 @@
 		string =
 			//'raw: <span style="font-family: monospace;">0x' +
 			//	bufferToHexStr(data, dataOffset, 6) + '</span><br/>' +
-			'x: ' + (x >= 0 ? '+' : '') + x.toFixed(5) + 'G<br/>' +
-			'y: ' + (y >= 0 ? '+' : '') + y.toFixed(5) + 'G<br/>' +
-			'z: ' + (z >= 0 ? '+' : '') + z.toFixed(5) + 'G<br/>'
+			'angle:' + (x >= 0 ? '+' : '') + x.toFixed(3) 
 
-        document.getElementById("acc_z").style.width = Math.abs((z/2.0).toFixed(2)*100)+"%" 
+       //ocument.getElementById("acc_z").style.width = Math.abs((z/2.0).toFixed(2)*100)+"%" 
 		// Update the value displayed.
 		displayValue('AccelerometerData', string)
 	}
@@ -273,7 +265,7 @@
                 displayValue('KeypressData', "FAIL")
             
             }
-            sensortag.mpu() 
+            sensortag.angle ();
         } else if (10 == value.item){
             pack_data = sensortag.get_log_pack(data)
             displayValue("pdm", pack_data.res)
@@ -288,6 +280,7 @@
                 is_steps = (is_steps+1)%2;
                 if (is_steps == 0){
                     drawGraph (pack_data.res)
+                }else{
                     displayValue("pdm", pack_data.res)
                 }
             }
@@ -362,9 +355,6 @@
                     'version': sensortag.getFirmwareString(),
                     'factory': "上达"
                     };
-        //var formd = new FormData();
-        //formd.append("name", "Robert");
-        //formd.append("mac", "Robert");
         $.ajax({
             async:true,
             crossOrigin: true,
