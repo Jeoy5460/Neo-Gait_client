@@ -222,6 +222,7 @@
     var pack_sync  = 0
     var is_steps  = 0
 
+    var pdm = {x:0, y:0}
 	function luxometerHandler(data)
 	{
 		//var value = sensortag.getLuxometerValue(data)
@@ -273,15 +274,22 @@
         } else if (11 == value.item){
             pack_sync = 1;
             is_steps = 0;
+            pdm.x = 0;
+            pdm.y = 0;
         } else if (12 == value.item){
             if (pack_sync == 1){
             
                 pack_data = sensortag.get_log_pack(data)
                 is_steps = (is_steps+1)%2;
                 if (is_steps == 0){
-                    drawGraph (pack_data.res)
+                    //drawGraph (pack_data.res)
+                    pdm.y = pack_data.res;
+        //            drawGraph ([pdm.x, pdm.y])
+                    output(pdm);
+
                 }else{
-                    displayValue("pdm", pack_data.res)
+                    //displayValue("pdm", pack_data.res)
+                    pdm.x=pack_data.res;
                 }
             }
         } else if (13 == value.item){
@@ -321,12 +329,8 @@
         // Clear the canvas and redraw the chart
         RGraph.Clear(document.getElementById("cvs"));
         var graph = getGraph('cvs', d1);
-        graph.Draw();
-        
-        // Add some data to the data arrays
-        //d1.push(RGraph.random(5, 10));
-        //d2.push(RGraph.random(5, 10));
         d1.push(e);
+        graph.Draw();
         
         // Get rid of the first values of the arrays
         if (d1.length > 100) {
@@ -334,6 +338,14 @@
         }
         //setTimeout(drawGraph,25);
 
+    }
+
+    var text = "";
+    function output(data)
+    {
+        text += data.x+ " " + data.y + "<br>";
+        
+        document.getElementById("pdm").innerHTML = text;   
     }
 
     function test_on()
@@ -364,7 +376,6 @@
             url: "http://123.59.57.67:8000",
             //contentType: "application/json; charset=utf-8",
             success: function(data){
-                //alert("success");
             },
             error:function(jqXHR, exception){
                 if (jqXHR.status != 200){
@@ -412,8 +423,6 @@
         {
             // Return Y coordinate for this value.
             var diagramY = value
-//                ((value * canvas.height) / 2)
-//                + (canvas.height / 2);
             return diagramY;
         }
 
