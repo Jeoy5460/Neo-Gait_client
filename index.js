@@ -347,7 +347,10 @@
         
         document.getElementById("pdm").innerHTML = text;   
     }
-
+    function log_clean()
+    {
+        text = "";
+    }
     function test_on()
     {
         sensortag.flash_test() 
