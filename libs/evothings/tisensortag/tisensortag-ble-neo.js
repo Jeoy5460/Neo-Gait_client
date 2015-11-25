@@ -162,7 +162,7 @@
 
  			// Set the config that turns on the needed sensors.
 			//instance.movementConfig = [sensors, 0]
-			instance.movementConfig = [0x07]
+			instance.movementConfig = [0x00]
 			instance.movementInterval = interval
 			instance.requiredServices.push(instance.MOVEMENT_SERVICE)
 
