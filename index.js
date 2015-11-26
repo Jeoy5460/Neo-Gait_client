@@ -303,13 +303,14 @@
     
     // Pre-pad the arrays with 100 null values
     for (var i=0; i< 100; ++i) {
-        d1.push(null);
+        d1.push([0,0]);
     }
 
     function getGraph(id, d1)
     {
         //var graph = new RGraph.Line(id, d1, d2);
-        var graph = new RGraph.Line(id, d1);
+        //var graph = new RGraph.Line(id, d1);
+        var graph = new RGraph.Scatter(id, d1);
         graph.Set('chart.background.barcolor1', 'white');
         graph.Set('chart.background.barcolor2', 'white');
         graph.Set('chart.title.xaxis', 'Time');
@@ -318,6 +319,7 @@
         graph.Set('chart.colors', ['rgb(169, 222, 244)', 'red']);
         graph.Set('chart.linewidth', 3);
         graph.Set('chart.ymax', 300);
+        graph.Set('chart.xmax', 100);
         graph.Set('chart.xticks', 25);
         graph.Set('chart.gutterLeft', 30);
 
@@ -404,56 +406,6 @@
         } else {
             document.getElementById(elem_id).style.backgroundColor ='red' 
         }
-    }
-    dataPoints= []
-
-    function drawDiagram(values)
-    {
-        var canvas = document.getElementById('canvas');
-        var context = canvas.getContext('2d');
-
-        // Add recent values.
-        dataPoints.push(values);
-
-        // Remove data points that do not fit the canvas.
-        if (dataPoints.length > canvas.width)
-        {
-            dataPoints.splice(0, (dataPoints.length - canvas.width));
-        }
-
-        // Value is an accelerometer reading between -1 and 1.
-        function calcDiagramY(value)
-        {
-            // Return Y coordinate for this value.
-            var diagramY = value
-            return diagramY;
-        }
-
-        function drawLine(axis, color)
-        {
-            context.strokeStyle = color;
-            context.beginPath();
-            var lastDiagramY = calcDiagramY(
-                dataPoints[dataPoints.length-1][axis]);
-            context.moveTo(0, lastDiagramY);
-            var x = 1;
-            for (var i = dataPoints.length - 2; i >= 0; i--)
-            {
-                var y = calcDiagramY(dataPoints[i][axis]);
-
-                context.lineTo(x, y);
-                x++;
-            }
-            context.stroke();
-        }
-
-        // Clear background.
-        context.clearRect(0, 0, canvas.width, canvas.height);
-
-        // Draw lines.
-        drawLine('x', '#f00');
-        //drawLine('y', '#0f0');
-        //drawLine('z', '#00f');
     }
 
 	function setBackgroundColor(color)
