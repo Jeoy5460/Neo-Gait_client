@@ -284,7 +284,7 @@
                 if (is_steps == 0){
                     //drawGraph (pack_data.res)
                     pdm.y = pack_data.res;
-        //            drawGraph ([pdm.x, pdm.y])
+                    drawGraph ([pdm.x, pdm.y])
                     output(pdm);
 
                 }else{
@@ -336,7 +336,6 @@
         if (d1.length > 100) {
             d1 = RGraph.array_shift(d1);
         }
-        //setTimeout(drawGraph,25);
 
     }
 
@@ -350,6 +349,7 @@
     function log_clean()
     {
         text = "";
+        document.getElementById("pdm").innerHTML = text;   
     }
     function test_on()
     {
