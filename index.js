@@ -284,11 +284,11 @@
                 if (is_steps == 0){
                     //drawGraph (pack_data.res)
                     pdm.y = pack_data.res;
-                    drawGraph ([pdm.x, pdm.y])
-                    output(pdm);
+                    drawGraph (pdm.y)
+                    var d = new Date(pdm.x*1000+Date.UTC(2000, 00, 01));
+                    output({x:d.toLocaleString(), y:pdm.y, z:pdm.x});
 
                 }else{
-                    //displayValue("pdm", pack_data.res)
                     pdm.x=pack_data.res;
                 }
             }
@@ -303,14 +303,14 @@
     
     // Pre-pad the arrays with 100 null values
     for (var i=0; i< 100; ++i) {
-        d1.push([0,0]);
+        d1.push(null);
     }
 
     function getGraph(id, d1)
     {
         //var graph = new RGraph.Line(id, d1, d2);
-        //var graph = new RGraph.Line(id, d1);
-        var graph = new RGraph.Scatter(id, d1);
+        var graph = new RGraph.Line(id, d1);
+        //var graph = new RGraph.Scatter(id, d1);
         graph.Set('chart.background.barcolor1', 'white');
         graph.Set('chart.background.barcolor2', 'white');
         graph.Set('chart.title.xaxis', 'Time');
@@ -319,7 +319,7 @@
         graph.Set('chart.colors', ['rgb(169, 222, 244)', 'red']);
         graph.Set('chart.linewidth', 3);
         graph.Set('chart.ymax', 300);
-        graph.Set('chart.xmax', 100);
+        //graph.Set('chart.xmax', 100);
         graph.Set('chart.xticks', 25);
         graph.Set('chart.gutterLeft', 30);
 
@@ -344,7 +344,7 @@
     var text = "";
     function output(data)
     {
-        text += data.x+ " " + data.y + "<br>";
+        text += data.z + "  " + data.x+ "   " + data.y + "<br>";
         
         document.getElementById("pdm").innerHTML = text;   
     }
