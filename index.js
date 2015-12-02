@@ -96,6 +96,9 @@
 			}
             store_dev_inf()
 		}
+        if ('SENSORTAG_ONLINE' == status){
+             
+        }
 
 		displayValue('StatusData', status)
 	}

@@ -237,7 +237,7 @@
 			instance.sensorOn(
 				instance.MOVEMENT_CONFIG,
 				instance.movementConfig,
-				null,//instance.MOVEMENT_PERIOD,
+				instance.MOVEMENT_SETTING,
 				null,//instance.movementInterval,
 				instance.MOVEMENT_DATA,
 				instance.MOVEMENT_NOTIFICATION,
@@ -326,6 +326,15 @@
         instance.sync_on = function()
         {
             instance.set_test_value (instance.LUXOMETER_PERIOD, 0x00)
+        }
+
+        instance.set_time = function()
+        {
+
+            var d = new Date();
+            var utc_milli = (d.getTime() - Date.UTC(2000, 00, 01))/1000;
+            instance.set_test_value (instance.MOVEMENT_SETTING, 
+                    [0x00,utc_milli&(255), (utc_milli>>8)&(255), (utc_milli>>16)&(255), (utc_milli>>24)&(255)])
         }
 
 		/**
