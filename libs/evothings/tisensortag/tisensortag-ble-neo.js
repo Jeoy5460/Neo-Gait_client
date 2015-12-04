@@ -332,8 +332,9 @@
         {
 
             var d = new Date();
-            var utc_milli = (d.getTime() - Date.UTC(2000, 00, 01))/1000;
-            instance.set_test_value (instance.MOVEMENT_SETTING, 
+            var tmp = (d.getTime() - Date.UTC(2000, 00, 01))/1000;
+            var utc_milli = tmp >>>0;
+            instance.set_setting_value (instance.LUXOMETER_SETTING, 
                     [0x00,utc_milli&(255), (utc_milli>>8)&(255), (utc_milli>>16)&(255), (utc_milli>>24)&(255)])
         }
 

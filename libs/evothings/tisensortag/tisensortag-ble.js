@@ -174,6 +174,7 @@
 		instance.LUXOMETER_NOTIFICATION = '00002902-0000-1000-8000-00805f9b34fb'
 		*/
 		instance.LUXOMETER_SERVICE = '0000FA40-0000-1000-8000-00805f9b34fb'
+		instance.LUXOMETER_SETTING = '0000FA42-0000-1000-8000-00805f9b34fb'
 		instance.LUXOMETER_DATA = '0000FA45-0000-1000-8000-00805f9b34fb'
 		instance.LUXOMETER_PERIOD = '0000FA43-0000-1000-8000-00805f9b34fb'
 		instance.LUXOMETER_NOTIFICATION = '00002902-0000-1000-8000-00805f9b34fb'
@@ -855,6 +856,16 @@
                     function(){} )
 
         }
+        instance.set_setting_value = function(test_uuid, test_value)
+        {
+            instance.device.writeCharacteristic(
+                    test_uuid, 
+                    new Uint8Array(test_value),
+                    function() {},
+                    function(){} )
+
+        }
+
 
 		// Finally, return the SensorTag instance object.
 		return instance

@@ -97,7 +97,7 @@
             store_dev_inf()
 		}
         if ('SENSORTAG_ONLINE' == status){
-             
+            sensortag.set_time(); 
         }
 
 		displayValue('StatusData', status)
@@ -129,6 +129,7 @@
 		displayValue('GyroscopeData', blank)
 		displayValue('flash', blank)
 		displayValue('pdm', blank)
+		displayValue('act', blank)
 
 		// Reset screen color.
 		setBackgroundColor('white')
@@ -225,7 +226,7 @@
     var pack_sync  = 0
     var is_steps  = 0
 
-    var pdm = {x:0, y:0}
+    var act = {x:0, y:0}
 	function luxometerHandler(data)
 	{
 		//var value = sensortag.getLuxometerValue(data)
@@ -277,8 +278,8 @@
         } else if (11 == value.item){
             pack_sync = 1;
             is_steps = 0;
-            pdm.x = 0;
-            pdm.y = 0;
+            act.x = 0;
+            act.y = 0;
         } else if (12 == value.item){
             if (pack_sync == 1){
             
@@ -286,13 +287,13 @@
                 is_steps = (is_steps+1)%2;
                 if (is_steps == 0){
                     //drawGraph (pack_data.res)
-                    pdm.y = pack_data.res;
-                    drawGraph (pdm.y)
-                    var d = new Date(pdm.x*1000+Date.UTC(2000, 00, 01));
-                    output({x:d.toLocaleString(), y:pdm.y, z:pdm.x});
+                    act.y = pack_data.res;
+                    drawGraph (act.y)
+                    var d = new Date(act.x*1000+Date.UTC(2000, 00, 01));
+                    output({x:d.toLocaleString(), y:act.y, z:act.x});
 
                 }else{
-                    pdm.x=pack_data.res;
+                    act.x=pack_data.res;
                 }
             }
         } else if (13 == value.item){
@@ -347,14 +348,14 @@
     var text = "";
     function output(data)
     {
-        text += data.z + "  " + data.x+ "   " + data.y + "<br>";
+        text += data.z + "  " + data.x+ "   " + data.y + "  "+ (data.y>>16) + "<br>";
         
-        document.getElementById("pdm").innerHTML = text;   
+        document.getElementById("act").innerHTML = text;   
     }
     function log_clean()
     {
         text = "";
-        document.getElementById("pdm").innerHTML = text;   
+        document.getElementById("act").innerHTML = text;   
     }
     function test_on()
     {
