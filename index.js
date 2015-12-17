@@ -226,7 +226,7 @@
     var pack_sync  = 0
     var is_steps  = 0
 
-    var act = {x:0, y:0}
+    var act = {x:0, y:0, z:0}
 	function luxometerHandler(data)
 	{
 		//var value = sensortag.getLuxometerValue(data)
@@ -280,19 +280,22 @@
             is_steps = 0;
             act.x = 0;
             act.y = 0;
+            act.z = 0;
         } else if (12 == value.item){
             if (pack_sync == 1){
             
                 pack_data = sensortag.get_log_pack(data)
-                is_steps = (is_steps+1)%2;
+                is_steps = (is_steps+1)%3;
                 if (is_steps == 0){
-                    //drawGraph (pack_data.res)
-                    act.y = pack_data.res;
+                    act.z = pack_data.res;
                     drawGraph (act.y)
                     var d = new Date(act.x*1000+Date.UTC(2000, 00, 01));
-                    output({x:d.toLocaleString(), y:act.y, z:act.x});
+                    output({x:d.toLocaleString(), y:act.y, z:act.z});
 
-                }else{
+                } else if(is_steps == 2){
+                    act.y = pack_data.res;
+                
+                } else if (is_steps == 1){
                     act.x=pack_data.res;
                 }
             }
@@ -348,7 +351,7 @@
     var text = "";
     function output(data)
     {
-        text += data.z + "  " + data.x+ "   " + data.y + "  "+ (data.y>>16) + "<br>";
+        text += data.x + "   " + data.y + "  " + (data.z) + "<br>";
         
         document.getElementById("act").innerHTML = text;   
     }
