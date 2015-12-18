@@ -11,15 +11,14 @@ evothings.tisensortag = {}
  * Constant identifying the CC2650 Bluetooth Smart SensorTag.
  * @public
  */
-evothings.tisensortag.CC2650_BLUETOOTH_SMART = 'CC2650 Bluetooth Smart'
+//evothings.tisensortag.CC2650_BLUETOOTH_SMART = 'CC2650 Bluetooth Smart'
 
 /**
  * Constant identifying the CC2541 Bluetooth Smart SensorTag.
  * @public
  */
-evothings.tisensortag.CC2541_BLUETOOTH_SMART = 'CC2541 Bluetooth Smart'
+//evothings.tisensortag.CC2541_BLUETOOTH_SMART = 'CC2541 Bluetooth Smart'
 
-//evothings.tisensortag.NEO_BLUETOOTH_SMART = 'Neo-Gait-fkxjsx'
 evothings.tisensortag.NEO_BLUETOOTH_SMART = 'Neo-Gait'
 
 /**
@@ -36,6 +35,7 @@ evothings.tisensortag.createInstance = function(type)
 	// TODO: Update this function as new models are added.
 
 	// Get a factory object that will add in specific methods.
+    /*
 	if (evothings.tisensortag.CC2541_BLUETOOTH_SMART == type)
 	{
 		var factory = evothings.tisensortag.ble.CC2541
@@ -44,12 +44,11 @@ evothings.tisensortag.createInstance = function(type)
 	{
 		var factory = evothings.tisensortag.ble.CC2650
 	}
-	else if (evothings.tisensortag.NEO_BLUETOOTH_SMART == type){
+    */
+	if (evothings.tisensortag.NEO_BLUETOOTH_SMART == type){
 	
 		var factory = evothings.tisensortag.ble.neo
-	}
-	else
-	{
+	} else {
 		return null
 	}
 
@@ -537,7 +536,7 @@ evothings.loadScripts(
 [
 	'libs/evothings/easyble/easyble.js',
 	'libs/evothings/tisensortag/tisensortag-ble.js',    // Abstract object for BLE tags
-	'libs/evothings/tisensortag/tisensortag-ble-cc2541.js', // Specific object for CC2541
-	'libs/evothings/tisensortag/tisensortag-ble-cc2650.js',  // Specific object for CC2650
+	//'libs/evothings/tisensortag/tisensortag-ble-cc2541.js', // Specific object for CC2541
+	//'libs/evothings/tisensortag/tisensortag-ble-cc2650.js',  // Specific object for CC2650
 	'libs/evothings/tisensortag/tisensortag-ble-neo.js'  // Specific object for CC2650
 ])

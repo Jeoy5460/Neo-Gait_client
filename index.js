@@ -42,7 +42,6 @@
 	}
     function ng_clean()
     {
-       //$('#flash_test').style.backgroundColor = 'white';
             document.getElementById('flash_test').style.backgroundColor ='white'; 
             document.getElementById('green').style.backgroundColor ='white'; 
             document.getElementById('red').style.backgroundColor ='white'; 
@@ -56,6 +55,7 @@
 	function connect()
 	{
 		sensortag.connectToNearestDevice()
+        //setTimeout(function(){ connect() }, 10000);
 	}
 
 	function disconnect()
