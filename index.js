@@ -4,9 +4,6 @@
     var dev_data
 	function initialiseSensorTag()
 	{
-		// Create SensorTag CC2650 instance.
-		//sensortag = evothings.tisensortag.createInstance(
-		//	evothings.tisensortag.CC2650_BLUETOOTH_SMART)
 
 		// Uncomment to use SensorTag CC2541.
 		//sensortag = evothings.tisensortag.createInstance(
@@ -31,10 +28,7 @@
 			.errorCallback(errorHandler)
 			/*
 			.keypressCallback(keypressHandler)
-			.accelerometerCallback(accelerometerHandler, 1000)
 			.magnetometerCallback(magnetometerHandler, 1000)
-			.gyroscopeCallback(gyroscopeHandler, 1000)
-			
 			.gyroscopeCallback(gyroscopeHandler, 1000)
             */
 			.accelerometerCallback(accelerometerHandler, 1000)
@@ -165,8 +159,6 @@
 		// Calculate the x,y,z accelerometer values from raw data.
 		var x = sensortag.getAccelerometerValues(data)
 
-		//var model = sensortag.getDeviceModel()
-		//var dataOffset = (model == 2 ? 6 : 0)
 
 		// Prepare the information to display.
 		string =
@@ -325,8 +317,7 @@
         graph.Set('chart.fillstyle', ['#daf1fa', '#faa']);
         graph.Set('chart.colors', ['rgb(169, 222, 244)', 'red']);
         graph.Set('chart.linewidth', 3);
-        graph.Set('chart.ymax', 10000);
-        //graph.Set('chart.xmax', 100);
+        graph.Set('chart.ymax', 500);
         graph.Set('chart.xticks', 25);
         graph.Set('chart.gutterLeft', 30);
 
@@ -355,11 +346,13 @@
         
         document.getElementById("act").innerHTML = text;   
     }
+
     function log_clean()
     {
         text = "";
         document.getElementById("act").innerHTML = text;   
     }
+
     function test_on()
     {
         sensortag.flash_test() 

@@ -199,32 +199,11 @@
 
 			//instance.temperatureOn()
 			//instance.humidityOn()
-			//instance.barometerOn()
 			instance.luxometerOn()
 			instance.movementOn()
 			//instance.keypressOn()
 		}
 
-		/**
-		 * SensorTag CC2650.
-		 * Public. Turn on barometer notification.
-		 * @instance
-		 * @public
-		 */
-		instance.barometerOn = function()
-		{
-			instance.sensorOn(
-				instance.BAROMETER_CONFIG,
-				instance.barometerConfig,
-				instance.BAROMETER_PERIOD,
-				instance.barometerInterval,
-				instance.BAROMETER_DATA,
-				instance.BAROMETER_NOTIFICATION,
-				instance.barometerFun
-			)
-
-			return instance
-		}
 
 		/**
 		 * SensorTag CC2650.
@@ -330,7 +309,6 @@
 
         instance.set_time = function()
         {
-
             var d = new Date();
             var tmp = (d.getTime() - Date.UTC(2000, 00, 01))/1000;
             var utc_milli = tmp >>>0;
@@ -379,7 +357,7 @@
 			var divisors = {x: 1000, y: 1000, z: 1000}
 
 			// Calculate accelerometer values.
-			var angle = evothings.util.littleEndianToInt16(data, 0) /100
+			var angle = evothings.util.littleEndianToUint16(data, 0) /100
 			return angle
 		}
 
