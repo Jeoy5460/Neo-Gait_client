@@ -46,6 +46,7 @@
             <ul data-role="listview">
                 <li data-icon="delete"><a href="#" data-rel="close">v0.0.4</a></li>
                 <li><a href="#pg_sync">sync</a></li>
+                <li><a href="scan.html" rel="external">scan</a></li>
             </ul>
     </div>
  
@@ -82,7 +83,10 @@
     <p>
     <strong>Network Status:</strong> <span id="st_net"></span>
     </p>
-        
+    <p>
+	    Device model: <span id="DeviceModel">?</span><br />
+		Firmware version: <span id="FirmwareData">?</span>
+	</p>   
 	<div id="Luxometer">
 		<h2>Flash Test:</h2>
 		<p>
@@ -116,10 +120,7 @@
 
 	</p>
 	<h2>Device info:</h2>
-	<p>
-	    Device model: <span id="DeviceModel">?</span><br />
-		Firmware version: <span id="FirmwareData">?</span>
-	</p>
+	
 
     </div>
     </div>
@@ -147,13 +148,13 @@
                 <span id="act"></span>
             </p>
     </div>
-</div>
 <script>
     jQuery(document).ready(function ()
     {
     });
 </script>
 
+ 
 
 
 </body>
