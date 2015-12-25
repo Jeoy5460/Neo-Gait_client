@@ -51,76 +51,76 @@
     </div>
  
     <div data-role="content">
-	<h1>Neo-Gait CC2541</h1>
+        <h1>Neo-Gait CC2541</h1>
 
-	<img src="neo-gait.png"
-		style="float:right;width:120px;height:auto;"/>
+        <img src="neo-gait.png"
+        style="float:right;width:120px;height:auto;"/>
 
-	<p>
-		This is a testing device program working with the <strong>Neo-Gait CC2541</strong>.
-	</p>
+        <p>
+        This is a testing device program working with the <strong>Neo-Gait CC2541</strong>.
+        </p>
 
-	<p id="upgradeNotice" class="hidden">
-		<span class="color_softred">Please upgrade the firmware of your SensorTag.</span>
-	</p>
+        <p id="upgradeNotice" class="hidden">
+        <span class="color_softred">Please upgrade the firmware of your SensorTag.</span>
+        </p>
+        <div data-role="controlgroup" data-type="horizontal">
+            <button onclick="connect()" class="ui-btn green">
+                Connect
+            </button>
 
-	<button onclick="connect()" class="green">
-		Connect
-	</button>
+            <button onclick="disconnect()" class="charcoal">
+                Disconnect
+            </button>
 
-	<button onclick="disconnect()" class="charcoal">
-		Disconnect
-	</button>
+            <button onclick="test_on()" class="blue">
+                Device Test
+            </button>
+        </div>
+        <p>
+        <strong>Ble Status:</strong> <span id="StatusData">Press Connect to find the nearest Neo-Gait</span>
+        </p>
 
-	<button onclick="test_on()" class="blue">
-        Device Test
-	</button>
+        <p>
+        <strong>Network Status:</strong> <span id="st_net"></span>
+        </p>
+        <p>
+        Device model: <span id="DeviceModel">?</span><br />
+        Firmware version: <span id="FirmwareData">?</span>
+        </p>   
+        <div id="Luxometer">
+            <h2>Flash Test:</h2>
+            <p>
+            <span id="flash">[Waiting for value]</span>
+            </p>
+            <div id="flash_test" style="background:white;height:20px;width:30%;"></div>
+        </div>
 
-	<p>
-		<strong>Ble Status:</strong> <span id="StatusData">Press Connect to find the nearest Neo-Gait</span>
-	</p>
+        <h2>LED:</h2>
+        <div id="red" style=height:25px;width:30%>R</div>
+        <div id="green" style=height:25px;width:30%>G</div>
+        <div id="blue" style=height:25px;width:30%>B</div>
+        <div id="breath" style=height:25px;width:30%>Breath</div>
 
-    <p>
-    <strong>Network Status:</strong> <span id="st_net"></span>
-    </p>
-    <p>
-	    Device model: <span id="DeviceModel">?</span><br />
-		Firmware version: <span id="FirmwareData">?</span>
-	</p>   
-	<div id="Luxometer">
-		<h2>Flash Test:</h2>
-		<p>
-			<span id="flash">[Waiting for value]</span>
-		</p>
-        <div id="flash_test" style="background:white;height:20px;width:30%;"></div>
-	</div>
+        <h2>Keypress:</h2>
+        <p>
+        <span id="KeypressData">[Waiting for value]</span>
+        </p>
+        <div id="btn" style=height:20px;width:30%></div>
 
-	<h2>LED:</h2>
-    <div id="red" style=height:25px;width:30%>R</div>
-    <div id="green" style=height:25px;width:30%>G</div>
-    <div id="blue" style=height:25px;width:30%>B</div>
-    <div id="breath" style=height:25px;width:30%>Breath</div>
-
-	<h2>Keypress:</h2>
-	<p>
-		<span id="KeypressData">[Waiting for value]</span>
-	</p>
-    <div id="btn" style=height:20px;width:30%></div>
-
-	<h2>Angle:</h2>
-	<p>
-		<span id="AccelerometerData">[Waiting for value]</span>
+        <h2>Angle:</h2>
+        <p>
+        <span id="AccelerometerData">[Waiting for value]</span>
         <div id="acc_z" style=height:10px;width:0px;background:red> </div>
-	</p>
+        </p>
 
-	<h2>Gyroscope:</h2>
-	<p>
-		<span id="GyroscopeData">[Waiting for value]</span>
+        <h2>Gyroscope:</h2>
+        <p>
+        <span id="GyroscopeData">[Waiting for value]</span>
         <div id="gyro_y" style=height:10px;width:0px;background:red> </div>
 
-	</p>
-	<h2>Device info:</h2>
-	
+        </p>
+        <h2>Device info:</h2>
+
 
     </div>
     </div>
