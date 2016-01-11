@@ -138,8 +138,8 @@ app.ui.displayDeviceList = function()
                 dataType: "json",
                 data:JSON.stringify(dev_data), 
                 //url: "http://123.59.57.67:8000",
-                //url: "http://10.42.0.1:8080/add",
-                url: "http://192.168.199.184:8080/add",
+                url: "http://10.42.0.231:8080/add",
+                //url: "http://192.168.199.184:8080/add",
                 //contentType: "application/json; charset=utf-8",
                 success: function(data){
                 },
