@@ -45,20 +45,63 @@
             document.getElementById('gyro_y').style.backgroundColor ='white'; 
             document.getElementById('btn').style.backgroundColor ='white'; 
             dev_data = {};
-    }   
+    }
+    var tm_st = 0
+    var tmout_con 
+    arr_tm = []
+    var conn_test_flag = 0
 	function connect()
 	{
 		sensortag.connectToNearestDevice()
         //setTimeout(function(){ connect() }, 10000);
+        var d = new Date();
+        tm_st = d.getTime(); 
+        conn_test_flag = 0;
 	}
+
+    function connect_test()
+    {   
+        sensortag.connectToNearestDevice()
+        var d = new Date();
+        tm_st = d.getTime(); 
+        
+        conn_test_flag = 1;
+    }
 
 	function disconnect()
 	{
 		sensortag.disconnectDevice()
 		resetSensorDisplayValues()
         ng_clean()
+        clearTimeout(tmout_con);
 	}
 
+	function test_disconnect()
+	{
+		sensortag.disconnectDevice()
+		resetSensorDisplayValues()
+        ng_clean()
+        tmout_con = setTimeout(function(){ connect_test()}, 2000);
+	}
+    function get_mean(elmt)
+    {
+        var sum = 0;
+        for( var i = 0; i < elmt.length; i++ ){
+            sum += parseInt( elmt[i], 10 ); //don't forget to add the base
+        }
+
+        return  sum/elmt.length;
+    }
+
+    function get_std(elmt,mean)
+    {
+        var sum = 0
+        for (var i = 0; i<elmt.length;i++){
+           sum += Math.pow(elmt[i] - mean,2);
+        }
+        return  sum/elmt.length;
+
+    }
 	function statusHandler(status)
 	{
 		if ('DEVICE_INFO_AVAILABLE' == status)
@@ -92,6 +135,19 @@
 		}
         if ('SENSORTAG_ONLINE' == status){
             sensortag.set_time(); 
+            if (conn_test_flag == 1){ 
+                    var d = new Date();
+                    arr_tm.push(d.getTime() - tm_st)
+                    //console.log(d.getTime() - tm_st); 
+                    //console.log("mean",get_mean(arr_tm));
+                    mean = get_mean(arr_tm)
+                    string =
+                    'mean: ' + mean.toFixed(2) + '<br/>'+
+                    'std:' + Math.sqrt(get_std(arr_tm,mean)).toFixed(2)  
+
+                    displayValue('conn_test', string)
+                    tmout_con = setTimeout(function(){ test_disconnect()}, 2000);
+            }
         }
 
 		displayValue('StatusData', status)
@@ -220,16 +276,21 @@
     function auto_cmd()
     {
         cmd_idx += 1;
-        cmd_idx = cmd_idx%3
-        if (cmd_idx == 1){
+        var idx = cmd_idx%3
+        if (idx == 1){
             sensortag.act(0x07);
             setTimeout(function(){auto_cmd()}, 10000);
-        } else if (cmd_idx == 2){
+        } else if (idx == 2){
+            sensortag.act(0x03);
+            setTimeout(function(){auto_cmd()}, 10000);
+        } else if (idx == 0 && cmd_idx < 1000){
+            sensortag.act(0x00);
             setTimeout(function(){auto_cmd()}, 10000);
         } else {
-        
             sensortag.act(0x00);
+        
         }
+
     }
 
     var pack_sync  = 0
@@ -278,7 +339,9 @@
                 displayValue('KeypressData', "FAIL")
             
             }
-            sensortag.act (0x07);
+            
+            auto_cmd()
+            //sensortag.act (0x07);
         } else if (10 == value.item){
             pack_data = sensortag.get_log_pack(data)
             displayValue("pdm", pack_data.res)

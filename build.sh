@@ -10,4 +10,4 @@ cordova plugin add com.evothings.ble
 echo "building android"
 cordova build android
 #adb install -r platforms/android/ant-build/demoapp.apk
-adb install -r /home/zhouyu/projs/ng_client/ng_android/platforms/android/build/outputs/apk/android-debug.apk
+adb install -r /home/zhouyu/projs/ng_box/ng_android/platforms/android/build/outputs/apk/android-debug.apk
