@@ -7,6 +7,7 @@ echo "adding plugins"
 cordova plugin add cordova-plugin-device
 cordova plugin add cordova-plugin-console
 cordova plugin add com.evothings.ble
+cordova plugin add org.apache.cordova.file
 echo "building android"
 cordova build android
 #adb install -r platforms/android/ant-build/demoapp.apk

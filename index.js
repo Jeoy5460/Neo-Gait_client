@@ -143,7 +143,9 @@
                     mean = get_mean(arr_tm)
                     string =
                     'mean: ' + mean.toFixed(2) + '<br/>'+
-                    'std:' + Math.sqrt(get_std(arr_tm,mean)).toFixed(2)  
+                    'std:' + Math.sqrt(get_std(arr_tm,mean)).toFixed(2) + '<br/>'+
+                    'max:' + Math.max.apply(null, arr_tm)+ '<br/>'+
+                    'cnt:' + arr_tm.length +'<br/>' 
 
                     displayValue('conn_test', string)
                     tmout_con = setTimeout(function(){ test_disconnect()}, 2000);
@@ -271,6 +273,8 @@
 		// Update the value displayed.
 		displayValue('GyroscopeData', string)
 	}
+
+    
 
     var cmd_idx = 0
     function auto_cmd()
