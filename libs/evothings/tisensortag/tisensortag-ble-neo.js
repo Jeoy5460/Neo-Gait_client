@@ -297,9 +297,9 @@
             instance.set_test_value (instance.LUXOMETER_PERIOD, 0x05)
         }
 
-        instance.angle = function()
+        instance.act = function(cmd)
         {
-            instance.set_test_value (instance.MOVEMENT_CONFIG, 0x07)
+            instance.set_test_value (instance.MOVEMENT_CONFIG, cmd)
         }
 
         instance.sync_on = function()

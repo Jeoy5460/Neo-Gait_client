@@ -215,9 +215,25 @@
 		// Update the value displayed.
 		displayValue('GyroscopeData', string)
 	}
+
+    var cmd_idx = 0
+    function auto_cmd()
+    {
+        cmd_idx += 1;
+        cmd_idx = cmd_idx%3
+        if (cmd_idx == 1){
+            sensortag.act(0x07);
+            setTimeout(function(){auto_cmd()}, 10000);
+        } else if (cmd_idx == 2){
+            setTimeout(function(){auto_cmd()}, 10000);
+        } else {
+        
+            sensortag.act(0x00);
+        }
+    }
+
     var pack_sync  = 0
     var is_steps  = 0
-
     var act = {x:0, y:0, z:0}
 	function luxometerHandler(data)
 	{
@@ -262,7 +278,7 @@
                 displayValue('KeypressData', "FAIL")
             
             }
-            sensortag.angle ();
+            sensortag.act (0x07);
         } else if (10 == value.item){
             pack_data = sensortag.get_log_pack(data)
             displayValue("pdm", pack_data.res)
