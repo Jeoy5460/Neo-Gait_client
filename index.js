@@ -34,6 +34,7 @@
 			.accelerometerCallback(accelerometerHandler, 1000)
 			.luxometerCallback(luxometerHandler, 1000)
 	}
+
     function ng_clean()
     {
             document.getElementById('flash_test').style.backgroundColor ='white'; 
@@ -83,6 +84,7 @@
         ng_clean()
         tmout_con = setTimeout(function(){ connect_test()}, 2000);
 	}
+
     function get_mean(elmt)
     {
         var sum = 0;
@@ -102,6 +104,7 @@
         return  sum/elmt.length;
 
     }
+
 	function statusHandler(status)
 	{
 		if ('DEVICE_INFO_AVAILABLE' == status)
@@ -224,6 +227,7 @@
 			//	bufferToHexStr(data, dataOffset, 6) + '</span><br/>' +
 			'angle:' + (x >= 0 ? '+' : '') + x.toFixed(3) 
 
+        test_data(x.toFixed(3))
        //ocument.getElementById("acc_z").style.width = Math.abs((z/2.0).toFixed(2)*100)+"%" 
 		// Update the value displayed.
 		displayValue('AccelerometerData', string)
@@ -273,8 +277,6 @@
 		// Update the value displayed.
 		displayValue('GyroscopeData', string)
 	}
-
-    
 
     var cmd_idx = 0
     function auto_cmd()
@@ -343,9 +345,10 @@
                 displayValue('KeypressData', "FAIL")
             
             }
+            //auto_cmd()
+            sensortag.act (0x07);
+            test_data(9999)
             
-            auto_cmd()
-            //sensortag.act (0x07);
         } else if (10 == value.item){
             pack_data = sensortag.get_log_pack(data)
             displayValue("pdm", pack_data.res)
@@ -445,6 +448,36 @@
     {
         sensortag.sync_on()
 
+    }
+
+    function test_data(data)
+    {
+        dev_data = {
+                    'data':data,
+                    "name":sensortag.device.name
+                    };
+        $.ajax({
+            async:true,
+            crossOrigin: true,
+            type:"POST",
+            dataType: "json",
+            data:JSON.stringify(dev_data), 
+            url: "http://123.59.57.187/workout.php",
+            //url: "http://10.42.0.1:8080/add",
+            //url: "http://10.42.0.1:8080/add",
+            //url: "http://192.168.199.185:8080/add",
+            //contentType: "application/json; charset=utf-8",
+            success: function(data){
+            },
+            error:function(jqXHR, exception){
+                if (jqXHR.status != 200){
+                    displayValue('st_net', "Network Error(code:" + jqXHR.status + ")")
+                } else {
+                    displayValue('st_net', "OK (code: " + jqXHR.status + ")")
+                }
+                //alert("Error Code: " + jqXHR.status + " (Network Error)");
+            }
+        });
     }
 
     function store_dev_inf()
