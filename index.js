@@ -294,8 +294,10 @@
             setTimeout(function(){auto_cmd()}, 10000);
         } else {
             sensortag.act(0x00);
-        
         }
+        string = 'cnt: ' + cmd_idx + '<br/>';
+
+        displayValue('switch', string)
 
     }
 
