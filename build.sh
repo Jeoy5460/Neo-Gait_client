@@ -3,14 +3,31 @@ rsync -av --progress ./* ./iot_android/www  --exclude build.sh --exclude iot_and
 export _JAVA_OPTIONS="-Xmx1024M"
 cd iot_android
 echo "adding android"
-[ -d platforms/android ] || cordova platforms add android
+
+#[ -d platforms/android ] || cordova platforms add android
+cordova platforms ls | grep 'android'   
+if [ $? -eq 0 ] ; then
+    echo "android platform exits"
+else
+    cordova platforms add android
+fi
+
 echo "adding plugins"
 cordova plugin add cordova-plugin-device
 cordova plugin add cordova-plugin-console
-#cordova plugin add com.evothings.ble
+#cordova plugin add com.evothings.ble #obsolete
 cordova plugin cordova-plugin-ble
-echo "building android"
-#cordova run android
-cordova build android
-#adb install -r platforms/android/ant-build/demoapp.apk
-adb install -r /home/xFrog/projs/iotbox/iot_android/platforms/android/build/outputs/apk/android-debug.apk
+if [ "$1" == "build" ] ;then
+    echo "building android"
+    cordova build android
+fi
+
+if [[ "$#" -eq  0 ]] ;then
+    echo "runing iotbox"
+    cordova run android
+fi
+
+if [ "$1" == "install" ] ;then
+    #adb install -r platforms/android/ant-build/demoapp.apk
+    adb install -r /home/xFrog/projs/iotbox/iot_android/platforms/android/build/outputs/apk/android-debug.apk
+fi
