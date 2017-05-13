@@ -35,13 +35,31 @@ function initialiseSensorTag()
 
 function display_devices()
 {
+/*
     value="<br/>"
     for(var i in window.localStorage){
 	   val = localStorage.getItem(i); 
 	   value +=  val+'<br/>' 
 	}
+*/
+   for(var i in window.localStorage){
+	   val = localStorage.getItem(i); 
+	   //value +=  val+'<br/>' 
+	   var label= document.createElement("label");
+	   var description = document.createTextNode(val);
+	   var checkbox = document.createElement("input");
 
-	$('#DeviceList').html(value);
+	   checkbox.type = "checkbox";    // make the element a checkbox
+	   checkbox.name = "ezfind";      // give it a name we can check on the server side
+       checkbox.value = i;         // make its value "pair"
+
+       label.appendChild(checkbox);   // add the box to the element
+       label.appendChild(description);// add the description to the elemen
+	   $('#DeviceList').append(label);
+	}
+
+
+	//$('#DeviceList').html(value);
 }
 
 function dev_clean()

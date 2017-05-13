@@ -45,8 +45,6 @@
     </div>
  
     <div data-role="content">
-        <h1>IOTBOX</h1>
-
         <img src="neo-gait.png"
         style="float:right;width:120px;height:auto;"/>
 
@@ -74,21 +72,17 @@
         </div>
 
         <p>
-        <strong>Ble Status:</strong> <span id="StatusData">Press Connect to find the nearest ezFind</span>
-        </p>
-
-        <p>
-        <strong>Network Status:</strong> <span id="st_net"></span>
-        </p>
-
-        <p>
         Device model: <span id="DeviceModel">?</span><br />
         Firmware version: <span id="FirmwareData">?</span>
         </p>   
 
         <p>
-        <strong>Device List:</strong> <span id="DeviceList">empty</span><br/>
+        <strong>Device List:</strong> 
+        <!--<span id="DeviceList">empty</span><br/>-->
         </p>
+
+		<div id="DeviceList">
+		</div>
 
     </div>
 </div>
