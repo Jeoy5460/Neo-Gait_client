@@ -55,6 +55,7 @@
         </p>
 
         <div data-role="controlgroup" data-type="horizontal">
+            <!--
             <button onclick="connect()" class="ui-btn green">
                 Connect
             </button>
@@ -62,9 +63,13 @@
             <button onclick="disconnect()" class="charcoal">
                 Disconnect
             </button>
-
+            -->
             <button onclick="display_devices()" class="charcoal">
                 List
+            </button>
+
+            <button onclick="dev_clean()" class="charcoal">
+                Clean
             </button>
         </div>
 
@@ -82,7 +87,7 @@
         </p>   
 
         <p>
-        Device List: <span id="DeviceList">empty</span><br/>
+        <strong>Device List:</strong> <span id="DeviceList">empty</span><br/>
         </p>
 
     </div>

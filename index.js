@@ -35,16 +35,19 @@ function initialiseSensorTag()
 
 function display_devices()
 {
-    value=""
+    value="<br/>"
     for(var i in window.localStorage){
 	   val = localStorage.getItem(i); 
-	   value +=  val+"\n" 
+	   value +=  val+'<br/>' 
 	}
 
 	$('#DeviceList').html(value);
-    
-	//document.getElementById('DeviceList').innerHTML = value
-    //alert(value)
+}
+
+function dev_clean()
+{
+    localStorage.clear();
+	$('#DeviceList').empty();
 }
 
 function connect()
