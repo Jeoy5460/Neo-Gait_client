@@ -58,14 +58,32 @@ function display_devices()
 	   $('#DeviceList').append(label);
 	}
 
-
 	//$('#DeviceList').html(value);
 }
 
-function dev_clean()
+function device_clean()
 {
     localStorage.clear();
 	$('#DeviceList').empty();
+}
+
+function device_find()
+{
+	varstr = "\n"
+	//checkedValue = $('.messageCheckbox:checked').val();
+	var checkboxes = document.getElementsByName('ezfind');
+	var checkboxesChecked = [];
+	// loop over them all
+	for (var i=0; i<checkboxes.length; i++) {
+		// And stick the checked ones onto an array...
+		if (checkboxes[i].checked) {
+			//checkboxesChecked.push(checkboxes[i]);
+            varstr += checkboxes[i].value + "\n"
+		}
+	}
+	alert (varstr)
+	// Return the array if it is non-empty, or null
+	//return checkboxesChecked.length > 0 ? checkboxesChecked : null
 }
 
 function connect()
