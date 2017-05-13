@@ -16,7 +16,7 @@ echo "adding plugins"
 cordova plugin add cordova-plugin-device
 cordova plugin add cordova-plugin-console
 #cordova plugin add com.evothings.ble #obsolete
-cordova plugin cordova-plugin-ble
+cordova plugin add cordova-plugin-ble
 if [ "$1" == "build" ] ;then
     echo "building android"
     cordova build android

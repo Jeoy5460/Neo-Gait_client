@@ -15,7 +15,10 @@ app.ui.updateTimer = null;
 
 app.initialize = function()
 {
-	document.addEventListener('deviceready', this.onDeviceReady, false);
+	document.addEventListener(
+		'deviceready',
+		function() { evothings.scriptsLoaded(app.onDeviceReady) },
+		false);
 };
 
 app.onDeviceReady = function()
@@ -109,8 +112,8 @@ app.ui.displayDeviceList = function()
 		if (device.timeStamp + 10000 > timeNow)
 		{
 			// Map the RSSI value to a width in percent for the indicator.
-			var rssiWidth = 1; // Used when RSSI is zero or greater.
-			if (device.rssi < -100) { rssiWidth = 100; }
+			var rssiWidth = 100; // Used when RSSI is zero or greater.
+			if (device.rssi < -100) { rssiWidth = 0; }
 			else if (device.rssi < 0) { rssiWidth = 100 + device.rssi; }
 
 			// Create tag for device data.
@@ -124,36 +127,8 @@ app.ui.displayDeviceList = function()
 				+ 	'<div style="background:rgb(225,0,0);height:20px;width:'
 				+ 		rssiWidth + '%;"></div>'
 				+ '</li>'
-			)
-                
-        if (device.rssi> -50){
-            dev_data = {
-                        'name':device.name,
-                        'mac':device.address,
-                        };
-            $.ajax({
-                async:true,
-                crossOrigin: true,
-                type:"POST",
-                dataType: "json",
-                data:JSON.stringify(dev_data), 
-                //url: "http://123.59.57.67:8000",
-                url: "http://10.42.0.231:8080/add",
-                //url: "http://192.168.199.184:8080/add",
-                //contentType: "application/json; charset=utf-8",
-                success: function(data){
-                },
-                error:function(jqXHR, exception){
-                    if (jqXHR.status != 200){
-                        console.log("network error")
-                    } else {
-                        console.log("OK")
-                    
-                    }
-                }
-            });
-        }
-        
+			);
+
 			$('#found-devices').append(element);
 		}
 	});
@@ -164,5 +139,25 @@ app.ui.displayStatus = function(message)
 {
 	$('#scan-status').html(message);
 };
+
+function getEventTarget(e) {
+    e = e || window.event;
+    return e.target || e.srcElement; 
+}
+
+app.ui.ul_onclick = function(event) {
+    var target = getEventTarget(event);
+    //alert(target.innerText);
+    varstr = target.innerText;
+    var lines = varstr.split('\n');
+    var stuff = prompt("Please enter a name:", "Harry Potter");
+	if (stuff == null || stuff == "") {
+        txt = "User cancelled the prompt.";
+    } else {
+        txt = stuff+ ":"+ lines[1] ;
+    }
+	alert(txt )
+};
+
 
 app.initialize();

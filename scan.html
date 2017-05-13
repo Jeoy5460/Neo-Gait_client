@@ -4,8 +4,8 @@
 <head>
 
 	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, user-scalable=no
-		initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+	<meta name="viewport" content="width=device-width, user-scalable=no,
+		shrink-to-fit=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
 
 	<title>BLE Scan</title>
 
@@ -21,7 +21,8 @@
 	<script src="cordova.js"></script>
 	<script src="libs/jquery/jquery.js"></script>
 	<script src="libs/evothings/evothings.js"></script>
-	<script src="scan.js"></script>
+	<script src="libs/evothings/ui/ui.js"></script>
+	<script src="app.js"></script>
 
 </head>
 
@@ -61,7 +62,7 @@
 
 	<p id="scan-status">Scanning Paused</p>
 
-	<ul id="found-devices" class="dynamic"></ul>
+	<ul id="found-devices" class="dynamic" onclick="app.ui.ul_onclick()"></ul>
 
 	<section id='troubleshooting'>
 
