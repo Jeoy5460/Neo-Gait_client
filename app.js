@@ -156,7 +156,13 @@ app.ui.ul_onclick = function(event) {
     } else {
         txt = stuff+ ":"+ lines[1] ;
     }
-	alert(txt )
+    window.localStorage.setItem(lines[1], stuff);
+	value = ""
+    for(var i in window.localStorage){
+	   val = localStorage.getItem(i); 
+	   value +=  val 
+	}
+	alert(value)
 };
 
 
