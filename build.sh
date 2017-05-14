@@ -29,5 +29,6 @@ fi
 
 if [ "$1" == "install" ] ;then
     #adb install -r platforms/android/ant-build/demoapp.apk
-    adb install -r /home/xFrog/projs/iotbox/iot_android/platforms/android/build/outputs/apk/android-debug.apk
+    echo "Installing apk"
+    adb install -r $PWD/platforms/android/build/outputs/apk/android-debug.apk
 fi

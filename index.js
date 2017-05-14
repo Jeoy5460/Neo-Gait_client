@@ -81,7 +81,7 @@ function device_find()
             varstr += checkboxes[i].value + "\n"
 		}
 	}
-	alert (varstr)
+	//alert (varstr)
 	// Return the array if it is non-empty, or null
 	//return checkboxesChecked.length > 0 ? checkboxesChecked : null
 }
