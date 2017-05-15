@@ -42,7 +42,8 @@ bletag.ui.device_clean=function()
 	$('#DeviceList').empty();
 }
 
-var deviceHandle
+var deviceHandle;
+var devlist=[];
 bletag.ui.device_find=function()
 {
 	varstr = "\n"
@@ -55,18 +56,14 @@ bletag.ui.device_find=function()
 		if (checkboxes[i].checked) {
 			//checkboxesChecked.push(checkboxes[i]);
             //varstr += checkboxes[i].value + "\n"
-			var address = checkboxes[i].value;
-            var win = 1;
-            checkboxes[i].parentNode.style.backgroundColor = "#bff0a1";
-            
-			//bletag.connectToDevice (address,win); 
-            if (win){
-            }else{
-            }
-			showMessage('done');
-            
+            var device={};
+			device.address = checkboxes[i].value;
+            device.ui = checkboxes[i]
+            devlist.push(device);
 		}
-
+        if (devlist.length){
+            bletag.connectToDevice (devlist.pop()); 
+        }
 	}
 	//alert (varstr)
 	// Return the array if it is non-empty, or null
@@ -74,9 +71,9 @@ bletag.ui.device_find=function()
 }
 
 // Handle of connected device.
-bletag.connectToDevice = function(address, win) 
+bletag.connectToDevice = function(device) 
 {
-	evothings.ble.connect(address, connectSuccess, connectError)
+	evothings.ble.connect(device.address, connectSuccess, connectError)
 
 	function connectSuccess(connectInfo)
 	{
@@ -85,9 +82,14 @@ bletag.connectToDevice = function(address, win)
 			// Save device handle.
 			deviceHandle = connectInfo.deviceHandle;
 
-            win = 0;
 			showMessage('Connected to device, reading services...');
 
+            device.ui.parentNode.style.backgroundColor = "#bff0a1";
+
+            bletag.disconnect ();
+            if (devlist.length){
+                bletag.connectToDevice (devlist.pop()); 
+            }
             //bletag.disconnect();
             //evothings.ble.close(devicHandle);
 			// Read all services, characteristics and descriptors.
