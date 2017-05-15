@@ -15,6 +15,8 @@ bletag.ui.device_list = function()
 	   value +=  val+'<br/>' 
 	}
 */
+
+   $('#DeviceList').empty();
    for(var i in window.localStorage){
 	   val = localStorage.getItem(i); 
 	   //value +=  val+'<br/>' 
@@ -40,6 +42,7 @@ bletag.ui.device_clean=function()
 	$('#DeviceList').empty();
 }
 
+var deviceHandle
 bletag.ui.device_find=function()
 {
 	varstr = "\n"
@@ -53,8 +56,17 @@ bletag.ui.device_find=function()
 			//checkboxesChecked.push(checkboxes[i]);
             //varstr += checkboxes[i].value + "\n"
 			var address = checkboxes[i].value;
-			bletag.connectToDevice (address); 
+            var win = 1;
+            checkboxes[i].parentNode.style.backgroundColor = "#bff0a1";
+            
+			//bletag.connectToDevice (address,win); 
+            if (win){
+            }else{
+            }
+			showMessage('done');
+            
 		}
+
 	}
 	//alert (varstr)
 	// Return the array if it is non-empty, or null
@@ -62,8 +74,7 @@ bletag.ui.device_find=function()
 }
 
 // Handle of connected device.
-var deviceHandle
-bletag.connectToDevice = function(address) 
+bletag.connectToDevice = function(address, win) 
 {
 	evothings.ble.connect(address, connectSuccess, connectError)
 
@@ -72,15 +83,18 @@ bletag.connectToDevice = function(address)
 		if (connectInfo.state == evothings.ble.connectionState.STATE_CONNECTED)
 		{
 			// Save device handle.
-			deviceHandle = connectInfo.deviceHandle
+			deviceHandle = connectInfo.deviceHandle;
 
-			showMessage('Connected to device, reading services...')
+            win = 0;
+			showMessage('Connected to device, reading services...');
 
+            //bletag.disconnect();
+            //evothings.ble.close(devicHandle);
 			// Read all services, characteristics and descriptors.
-			evothings.ble.readAllServiceData(
-				deviceHandle,
-				readServicesSuccess,
-				readServicesError)
+			//evothings.ble.readAllServiceData(
+			//	deviceHandle,
+			//	readServicesSuccess,
+			//	readServicesError)
 				// Options not implemented.
 				// { serviceUUIDs: [LUXOMETER_SERVICE] }
 		}
@@ -119,7 +133,8 @@ bletag.connectToDevice = function(address)
 bletag.disconnect = function()
 {
 	if (deviceHandle){
-		evothings.ble.close(devicHandle);
+		evothings.ble.close(deviceHandle);
+        showMessage('disconnected');
 	}
 }
 
