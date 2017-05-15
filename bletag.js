@@ -65,9 +65,49 @@ bletag.ui.device_find=function()
             bletag.connectToDevice (devlist.pop()); 
         }
 	}
+	bletag.startScan (bletag.connectToNext);
 	//alert (varstr)
 	// Return the array if it is non-empty, or null
 	//return checkboxesChecked.length > 0 ? checkboxesChecked : null
+}
+
+bletag.stopScan = function()
+{
+	evothings.ble.stopScan();
+};
+
+bletag.startScan = function(callbackFun)
+{
+	bletag.stopScan();
+
+	evothings.ble.startScan(
+		function(device)
+		{
+			// Report success. Sometimes an RSSI of +127 is reported.
+			// We filter out these values here.
+			if (device.rssi <= 0)
+			{
+				callbackFun(device, null);
+			}
+		},
+		function(errorCode)
+		{
+			// Report error.
+			callbackFun(null, errorCode);
+		}
+	);
+};
+
+bletag.connectToNext = function(device, erroCode)
+{
+    if (devlist.length && device){
+		var index;
+		for (index = 0; index < devlist.length; ++index) {
+			if (devlist[index].device.address === device.address){
+				bletag.connectToDevice (devlist.remove(index)); 
+			}
+		}
+    }
 }
 
 // Handle of connected device.
@@ -87,11 +127,6 @@ bletag.connectToDevice = function(device)
             device.ui.parentNode.style.backgroundColor = "#bff0a1";
 
             bletag.disconnect ();
-            if (devlist.length){
-                bletag.connectToDevice (devlist.pop()); 
-            }
-            //bletag.disconnect();
-            //evothings.ble.close(devicHandle);
 			// Read all services, characteristics and descriptors.
 			//evothings.ble.readAllServiceData(
 			//	deviceHandle,
