@@ -24,7 +24,7 @@ fi
 
 if [[ "$#" -eq  0 ]] ;then
     echo "runing iotbox"
-    cordova run android
+    cordova run android --device
 fi
 
 if [ "$1" == "install" ] ;then

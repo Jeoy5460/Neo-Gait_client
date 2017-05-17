@@ -155,8 +155,8 @@ app.ui.ul_onclick = function(event) {
         txt = "User cancelled the prompt.";
     } else {
         txt = stuff+ ":"+ lines[1] ;
+        window.localStorage.setItem(lines[1], stuff);
     }
-    window.localStorage.setItem(lines[1], stuff);
 };
 
 

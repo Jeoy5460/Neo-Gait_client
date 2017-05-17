@@ -252,4 +252,8 @@ function byteToHexStr(d)
 document.addEventListener(
     'deviceready',
     function() { evothings.scriptsLoaded(bletag.initialise) },
-    false)
+    false);
+
+document.addEventListener("DOMContentLoaded", function(event) {
+	bletag.ui.device_list();
+});
