@@ -12,6 +12,12 @@ app.ui = {};
 // Timer that updates the device list and removes inactive
 // devices in case no devices are found by scan.
 app.ui.updateTimer = null;
+var lang = new Lang();
+lang.dynamic('ch', 'libs/js/langpack/ch.json');
+lang.init({
+	defaultLang: 'en'
+//	currentLang: 'ch'
+});
 
 app.initialize = function()
 {
@@ -27,6 +33,17 @@ app.onDeviceReady = function()
 	// Here you can update the UI to say that
 	// the device (the phone/tablet) is ready
 	// to use BLE and other Cordova functions.
+	navigator.globalization.getPreferredLanguage(
+        function (language) {
+            //console.log('language: ' + language.value + '\n');
+            if (language.value === 'zh-CN'){
+                window.lang.change('ch');
+            }
+        },
+        function () {
+            console.log('Error getting language\n');
+        }
+    );
 };
 
 // Start the scan. Call the callback function when a device is found.
@@ -107,31 +124,31 @@ app.ui.displayDeviceList = function()
 	var timeNow = Date.now();
 
 	$.each(app.devices, function(key, device)
-	{
-		// Only show devices that are updated during the last 10 seconds.
-		if (device.timeStamp + 10000 > timeNow)
 		{
-			// Map the RSSI value to a width in percent for the indicator.
-			var rssiWidth = 100; // Used when RSSI is zero or greater.
-			if (device.rssi < -100) { rssiWidth = 0; }
-			else if (device.rssi < 0) { rssiWidth = 100 + device.rssi; }
+			// Only show devices that are updated during the last 10 seconds.
+			if (device.timeStamp + 10000 > timeNow)
+			{
+				// Map the RSSI value to a width in percent for the indicator.
+				var rssiWidth = 100; // Used when RSSI is zero or greater.
+				if (device.rssi < -100) { rssiWidth = 0; }
+				else if (device.rssi < 0) { rssiWidth = 100 + device.rssi; }
 
-			// Create tag for device data.
-			var element = $(
-				'<li>'
-				+	'<strong>' + device.name + '</strong><br />'
-				// Do not show address on iOS since it can be confused
-				// with an iBeacon UUID.
-				+	(evothings.os.isIOS() ? '' : device.address + '<br />')
-				+	device.rssi + '<br />'
-				+ 	'<div style="background:rgb(225,0,0);height:20px;width:'
-				+ 		rssiWidth + '%;"></div>'
-				+ '</li>'
-			);
+				// Create tag for device data.
+				var element = $(
+					'<li>'
+					+	'<strong>' + device.name + '</strong><br />'
+					// Do not show address on iOS since it can be confused
+					// with an iBeacon UUID.
+					+	(evothings.os.isIOS() ? '' : device.address + '<br />')
+					+	device.rssi + '<br />'
+					+ 	'<div style="background:rgb(225,0,0);height:20px;width:'
+					+ 		rssiWidth + '%;"></div>'
+					+ '</li>'
+				);
 
-			$('#found-devices').append(element);
-		}
-	});
+				$('#found-devices').append(element);
+			}
+		});
 };
 
 // Display a status message
@@ -141,22 +158,22 @@ app.ui.displayStatus = function(message)
 };
 
 function getEventTarget(e) {
-    e = e || window.event;
-    return e.target || e.srcElement; 
+	e = e || window.event;
+	return e.target || e.srcElement; 
 }
 
 app.ui.ul_onclick = function(event) {
-    var target = getEventTarget(event);
-    //alert(target.innerText);
-    varstr = target.innerText;
-    var lines = varstr.split('\n');
-    var stuff = prompt("Please enter a name:", "Harry Potter");
+	var target = getEventTarget(event);
+	//alert(target.innerText);
+	varstr = target.innerText;
+	var lines = varstr.split('\n');
+	var stuff = prompt("Please enter a name:", "Harry Potter");
 	if (stuff == null || stuff == "") {
-        txt = "User cancelled the prompt.";
-    } else {
-        txt = stuff+ ":"+ lines[1] ;
-        window.localStorage.setItem(lines[1], stuff);
-    }
+		txt = "User cancelled the prompt.";
+	} else {
+		txt = stuff+ ":"+ lines[1] ;
+		window.localStorage.setItem(lines[1], stuff);
+	}
 };
 
 

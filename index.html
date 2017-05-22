@@ -46,8 +46,8 @@
     <div data-role="panel" data-display="overlay" data-theme="b" id="nav-panel" >
             <ul data-role="listview">
                 <li data-icon="delete"><a href="#" data-rel="close">v0.0.1</a></li>
-                <li ><a href="scan.html" rel="external">scan</a></li>
-                <li ><a href="#setting">setting</a></li>
+                <li ><a href="scan.html" rel="external" lang="en">scan</a></li>
+                <li ><a href="#setting" lang="en">setting</a></li>
             </ul>
     </div>
  
@@ -108,8 +108,7 @@
 		</div>
 
 		<div data-role="content">
-     <div id="langChanger"><a href="#" onclick="window.lang.change('en'); return false;">Switch to English</a> | <a href="#" onclick="window.lang.change('ch'); return false;">Switch
-	to Thai</a></div>
+     <div id="langChanger"><a href="#" onclick="window.lang.change('en'); return false;">Switch to English</a> | <a href="#" onclick="window.lang.change('ch'); return false;">Switch to Chinese</a></div>
 
 		</div>
     </div>
@@ -126,8 +125,8 @@
 	lang.dynamic('ch', 'libs/js/langpack/ch.json');
 	lang.init({
 		defaultLang: 'en'
+        //currentLang: 'ch'
 	});
-    //window.lang.change('ch');
 	
 document.addEventListener("deviceready", onDeviceReady, false);
 function onDeviceReady() {

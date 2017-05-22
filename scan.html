@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no,
 		shrink-to-fit=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
 
-	<title>BLE Scan</title>
+	<title >BLE Scan</title>
 
 	<style>
 		@import 'ui/css/evothings-app.css';
@@ -22,6 +22,8 @@
 	<script src="libs/jquery/jquery.js"></script>
 	<script src="libs/evothings/evothings.js"></script>
 	<script src="libs/evothings/ui/ui.js"></script>
+    <script src="libs/js/js.cookie.js"></script>
+    <script src="libs/js/jquery-lang.js" charset="utf-8" type="text/javascript"></script>
 	<script src="app.js"></script>
 
 </head>
@@ -32,7 +34,7 @@
 		<button class="back" onclick="history.back()">
 			<img src="ui/images/arrow-left.svg" />
 		</button>
-        <p style="align-items:center;display:flex;justify-content:center;font-size:20px;font-weight:bold;"> IOTBOX </p>
+        <p lang="en" style="align-items:center;display:flex;justify-content:center;font-size:20px;font-weight:bold;"> IOTBOX </p>
 		<!--<img class="logotype" src="ui/images/logo.svg" alt="Evothings" />
         -->
 <!--
@@ -52,17 +54,17 @@
 
 	</header>
 
-	<h1>BLE Scan</h1>
+	<h1 lang="en">BLE Scan</h1>
 
-	<button onclick="app.ui.onStartScanButton()" class="green">
+	<button onclick="app.ui.onStartScanButton()" class="green" lang="en">
 		START SCAN
 	</button>
 
-	<button onclick="app.ui.onStopScanButton()" class="charcoal">
+	<button onclick="app.ui.onStopScanButton()" class="charcoal" lang="en">
 		STOP SCAN
 	</button>
 
-	<p id="scan-status">Scanning Paused</p>
+	<p id="scan-status" lang="en">Scanning Paused</p>
 
 	<ul id="found-devices" class="dynamic" onclick="app.ui.ul_onclick()"></ul>
 
