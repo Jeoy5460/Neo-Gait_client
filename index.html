@@ -30,20 +30,24 @@
 	<script src="libs/jquery/jquery.mobile-1.4.5.min.js"></script>
 	<script src="libs/evothings/evothings.js"></script>
     <script src="bletag.js"></script>
+    <script src="libs/js/js.cookie.js"></script>
+    <script src="libs/js/jquery-lang.js" charset="utf-8" type="text/javascript"></script>
+
 </head>
 
 <body>
 
 <div data-role="page">
     <div data-role="header" data-position="fixed">
-            <h1>IOTBOX</h1>
+            <h1 lang="en" >IOTBOX</h1>
             <a href="#nav-panel" class="ui-btn-left " data-icon="bars" data-iconpos="notext">Menu</a>
     </div>
+
     <div data-role="panel" data-display="overlay" data-theme="b" id="nav-panel" >
             <ul data-role="listview">
                 <li data-icon="delete"><a href="#" data-rel="close">v0.0.1</a></li>
-                <!--<li><a href="#pg_sync">sync</a></li>-->
-                <li><a href="scan.html" rel="external">scan</a></li>
+                <li ><a href="scan.html" rel="external">scan</a></li>
+                <li ><a href="#setting">setting</a></li>
             </ul>
     </div>
  
@@ -70,9 +74,7 @@
                 Clean
             </button>
 
-            <button onclick="bletag.ui.device_find()" class="charcoal">
-                Find
-            </button>
+            <button lang="en" onclick="bletag.ui.device_find()" class="charcoal">Find</button>
 
         </div>
 
@@ -83,11 +85,11 @@
         </p>   
 -->
 		<p>
-		Message: <span id="message">?</span><br/>
+        <span lang="en">Message</span>: <span id="message">?</span><br/>
 		</p>
 
         <p>
-        <strong>Device List:</strong> 
+        <strong lang="en">Device List</strong><strong>:</strong> 
         <!--<span id="DeviceList">empty</span><br/>-->
         </p>
 
@@ -95,12 +97,54 @@
 		</div>
 
     </div>
-</div>
+
+	</div>
+	<div data-role="page" id="setting">
+		<div data-role="header" data-position="fixed">
+        <h1 lang="en">IOTBOX</h1>
+            <a href="#"  data-icon="arrow-l" data-iconpos="notext" data-add-back-btn="true" data-rel="back">back</a>
+		</div>
+
+		<div data-role="content">
+     <div id="langChanger"><a href="#" onclick="window.lang.change('en'); return false;">Switch to English</a> | <a href="#" onclick="window.lang.change('ch'); return false;">Switch
+	to Thai</a></div>
+
+		</div>
+    </div>
+
 
 <script>
     jQuery(document).ready(function ()
     {
+
     });
+
+	// Create language switcher instance
+	var lang = new Lang();
+	lang.dynamic('ch', 'libs/js/langpack/ch.json');
+	lang.init({
+		defaultLang: 'en'
+	});
+    //window.lang.change('ch');
+	
+document.addEventListener("deviceready", onDeviceReady, false);
+function onDeviceReady() {
+	navigator.globalization.getPreferredLanguage(
+        function (language) {
+            //console.log('language: ' + language.value + '\n');
+            if (language.value === 'zh-CN'){
+                //window.lang.change('ch');
+		//"scan":"扫描",
+		//"setting":"设置",
+		//"Clean":"清除",
+            }
+        },
+        function () {
+            console.log('Error getting language\n');
+        }
+    );
+}
+
 </script>
 
 </body>

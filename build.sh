@@ -17,6 +17,7 @@ cordova plugin add cordova-plugin-device
 cordova plugin add cordova-plugin-console
 #cordova plugin add com.evothings.ble #obsolete
 cordova plugin add cordova-plugin-ble
+cordova plugin add cordova-plugin-globalization
 if [ "$1" == "build" ] ;then
     echo "building android"
     cordova build android
