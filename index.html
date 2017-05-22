@@ -70,11 +70,13 @@
                 Disconnect
             </button>
             -->
-            <button onclick="bletag.ui.device_clean()" class="charcoal">
+            <button lang="en" onclick="bletag.ui.device_clean()" class="charcoal">
                 Clean
             </button>
 
-            <button lang="en" onclick="bletag.ui.device_find()" class="charcoal">Find</button>
+            <button lang="en" onclick="bletag.ui.device_find()" class="charcoal">
+                Find
+            </button>
 
         </div>
 
@@ -133,10 +135,7 @@ function onDeviceReady() {
         function (language) {
             //console.log('language: ' + language.value + '\n');
             if (language.value === 'zh-CN'){
-                //window.lang.change('ch');
-		//"scan":"扫描",
-		//"setting":"设置",
-		//"Clean":"清除",
+                window.lang.change('ch');
             }
         },
         function () {
