@@ -42,6 +42,15 @@ bletag.ui.device_clean=function()
 	$('#DeviceList').empty();
 }
 
+bletag.ui.device_reset=function()
+{
+
+	var checkboxes = document.getElementsByName('ezfind');
+	for (var i=0; i<checkboxes.length; i++) {
+		checkboxes[i].parentNode.style.backgroundColor = "white";
+	}
+}
+
 var deviceHandle;
 var devlist=[];
 bletag.ui.device_find=function()
@@ -61,11 +70,16 @@ bletag.ui.device_find=function()
             device.ui = checkboxes[i]
             devlist.push(device);
 		}
-        if (devlist.length){
-            bletag.connectToDevice (devlist.pop()); 
+/*        
+                if (devlist.length){
+            bletag.connectToDevice (devlist.pop());
         }
+*/
+
 	}
-	bletag.startScan (bletag.connectToNext);
+	if (devlist.length){
+		bletag.startScan (bletag.connectToNext);
+	}
 	//alert (varstr)
 	// Return the array if it is non-empty, or null
 	//return checkboxesChecked.length > 0 ? checkboxesChecked : null
@@ -103,8 +117,9 @@ bletag.connectToNext = function(device, erroCode)
     if (devlist.length && device){
 		var index;
 		for (index = 0; index < devlist.length; ++index) {
-			if (devlist[index].device.address === device.address){
-				bletag.connectToDevice (devlist.remove(index)); 
+			if (devlist[index].address === device.address){
+				bletag.connectToDevice (devlist[index]); 
+				devlist.splice(index,1);
 			}
 		}
     }
