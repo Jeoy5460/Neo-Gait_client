@@ -15,22 +15,35 @@ bletag.ui.device_list = function()
 	   value +=  val+'<br/>' 
 	}
 */
-
+window.localStorage.setItem("abc123", "hello");
    $('#DeviceList').empty();
    for(var i in window.localStorage){
 	   val = localStorage.getItem(i); 
 	   //value +=  val+'<br/>' 
-	   var label= document.createElement("label");
-	   var description = document.createTextNode(val);
-	   var checkbox = document.createElement("input");
+       var div = document.createElement("div");
+       div.className="ui-checkbox";
 
+	   var label= document.createElement("label");
+
+	   var checkbox = document.createElement("input");
 	   checkbox.type = "checkbox";    // make the element a checkbox
 	   checkbox.name = "ezfind";      // give it a name we can check on the server side
        checkbox.value = i;         // make its value "pair"
+       //checkbox.className="ui-btn"
+       checkbox.id=i
 
-       label.appendChild(checkbox);   // add the box to the element
+       //label.appendChild(checkbox);   // add the box to the element
+	   var description = document.createTextNode(val);
+       decription = val;
+	   label.htmlFor= i;
        label.appendChild(description);// add the description to the elemen
-	   $('#DeviceList').append(label);
+       div.appendChild(checkbox);
+       div.appendChild(label);
+	   $('#DeviceList').append(div).trigger("create");
+	   
+	   //$("input[type='checkbox']").checkbox("refresh");
+	   //$("#DeviceList").append('<input type="checkbox" name="' + checkbox.name + '" id="id' + i + '"><label for="id' + i + '">' + val + '</label>');
+
 	}
 
 	//$('#DeviceList').html(value);
@@ -272,3 +285,34 @@ document.addEventListener(
 document.addEventListener("DOMContentLoaded", function(event) {
 	bletag.ui.device_list();
 });
+
+//$( document ).on("pagecreate", "#main-page", function(){
+    $( document ).on("swipeleft swiperight", "#DeviceList label", function(event){
+        var listitem = $(this),
+            dir = event.type === "swipeleft" ? "left":"right",
+            transition = $.support.cssTransform3d? dir: false;
+            confirmAndDelete(listitem, transition);
+			console.log(dir);
+        });
+
+	function confirmAndDelete(listitem, transition){
+		if ( transition ) {
+                listitem
+                    // Add the class for the transition direction
+                    .addClass( transition )
+                    // When the transition is done...
+                    .on( "webkitTransitionEnd transitionend otransitionend", function() {
+                        // ...the list item will be removed
+						console.log("transition");
+                        listitem.remove();
+                        // ...the list will be refreshed and the temporary class for border styling removed
+                        //$( "#DeviceList" ).listview( "refresh" ).find( ".border-bottom" ).removeClass( "border-bottom" );
+                    })
+                    // During the transition the previous button gets bottom border
+                    //.prev( "label" ).children( "a" ).addClass( "border-bottom" )
+                    // Remove the highlight
+                    //.end().end().children( ".ui-btn" ).removeClass( "ui-btn-active" );
+            }
+
+	}
+//});

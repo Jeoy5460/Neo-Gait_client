@@ -37,7 +37,7 @@
 
 <body>
 
-<div data-role="page">
+<div data-role="page" id="main-page">
     <div data-role="header" data-position="fixed">
             <h1 lang="en" >IOTBOX</h1>
             <a href="#nav-panel" class="ui-btn-left " data-icon="bars" data-iconpos="notext">Menu</a>
@@ -60,7 +60,7 @@
         This is a program working with the <strong>EZFIND</strong>.
         </p>
         -->
-        <div data-role="controlgroup" data-type="horizontal">
+        <div data-role="controlgroup" data-type="horizontal" >
             <!--
             <button onclick="connect()" class="ui-btn green">
                 Connect
@@ -99,8 +99,8 @@
         <!--<span id="DeviceList">empty</span><br/>-->
         </p>
 
-		<div id="DeviceList">
-		</div>
+		<fieldset data-role="controlgroup" id="DeviceList">
+		</fieldset>
 
     </div>
 
