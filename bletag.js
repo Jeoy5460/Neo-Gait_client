@@ -15,38 +15,29 @@ bletag.ui.device_list = function()
 	   value +=  val+'<br/>' 
 	}
 */
-window.localStorage.setItem("abc123", "hello");
+    window.localStorage.setItem("abc123", "hello");
    $('#DeviceList').empty();
    for(var i in window.localStorage){
 	   val = localStorage.getItem(i); 
-	   //value +=  val+'<br/>' 
        var div = document.createElement("div");
-       div.className="ui-checkbox";
-
 	   var label= document.createElement("label");
 
 	   var checkbox = document.createElement("input");
 	   checkbox.type = "checkbox";    // make the element a checkbox
 	   checkbox.name = "ezfind";      // give it a name we can check on the server side
        checkbox.value = i;         // make its value "pair"
-       //checkbox.className="ui-btn"
        checkbox.id=i
 
        //label.appendChild(checkbox);   // add the box to the element
 	   var description = document.createTextNode(val);
        decription = val;
 	   label.htmlFor= i;
-       label.appendChild(description);// add the description to the elemen
+       label.appendChild(description);// add the description to the element
        div.appendChild(checkbox);
        div.appendChild(label);
 	   $('#DeviceList').append(div).trigger("create");
-	   
-	   //$("input[type='checkbox']").checkbox("refresh");
-	   //$("#DeviceList").append('<input type="checkbox" name="' + checkbox.name + '" id="id' + i + '"><label for="id' + i + '">' + val + '</label>');
-
 	}
 
-	//$('#DeviceList').html(value);
 }
 
 bletag.ui.device_clean=function()
@@ -279,20 +270,24 @@ function byteToHexStr(d)
 
 document.addEventListener(
     'deviceready',
-    function() { evothings.scriptsLoaded(bletag.initialise) },
+    function() { evothings.scriptsLoaded(bletag.initialise); 
+		$('fieldset').bind('swipeleft',alert('left')); //show next hides screen1, shows screen2 
+		$('fieldset').bind('swiperight',alert('right'));//show prev hides screen2, shows screen1
+    },
     false);
 
 document.addEventListener("DOMContentLoaded", function(event) {
 	bletag.ui.device_list();
 });
-
-//$( document ).on("pagecreate", "#main-page", function(){
-    $( document ).on("swipeleft swiperight", "#DeviceList label", function(event){
-        var listitem = $(this),
+/*
+$( document ).one("pageinit", "[data-role='page'].main-page", function(){
+    $(document).on("swipeleft swiperight", function(event){
+        //var listitem = $(this),
             dir = event.type === "swipeleft" ? "left":"right",
-            transition = $.support.cssTransform3d? dir: false;
-            confirmAndDelete(listitem, transition);
+            //transition = $.support.cssTransform3d? dir: false;
+            //confirmAndDelete(listitem, transition);
 			console.log(dir);
+			alert(dir);
         });
 
 	function confirmAndDelete(listitem, transition){
@@ -315,4 +310,5 @@ document.addEventListener("DOMContentLoaded", function(event) {
             }
 
 	}
-//});
+});
+*/
